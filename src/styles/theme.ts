@@ -33,4 +33,17 @@ export default {
       white: "#FFFFFF",
     },
   },
+  fonts: {
+    martel_300: "Martel_300Light",
+    martel_400: "Martel_400Regular",
+    martel_600: "Martel_600SemiBold",
+    martel_700: "Martel_700Bold",
+    martel_800: "Martel_800ExtraBold",
+    martel_900: "Martel_900Black",
+    livvic_400: "Livvic_400Regular",
+    livvic_500: "Livvic_500Medium",
+    livvic_600: "Livvic_600SemiBold",
+    livvic_700: "Livvic_700Bold",
+    livvic_900: "Livvic_900Black",
+  },
 };
