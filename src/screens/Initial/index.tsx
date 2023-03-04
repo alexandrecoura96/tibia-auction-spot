@@ -29,9 +29,9 @@ export function Initial() {
       style={{ paddingTop: StatusBar.currentHeight }}
     >
       <LinearGradient
-        colors={["rgba(0, 0, 0, 0)", "#051122"]}
+        colors={["rgba(0, 0, 0, 0.2)", "#051122"]}
         start={{ x: 1, y: 0.1 }}
-        end={{ x: 1, y: 0.6 }}
+        end={{ x: 1, y: 0.5 }}
         style={{
           position: "absolute",
           top: 0,
@@ -62,11 +62,11 @@ export function Initial() {
                 justifyContent: "center",
               }}
             >
-              <Text
+              <Title
                 style={{ color: "#CBA88E", fontSize: 30, fontWeight: "400" }}
               >
                 Welcome Tibians
-              </Text>
+              </Title>
             </ImageBackground>
           </View>
           <View

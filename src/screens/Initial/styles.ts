@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled.ImageBackground`
@@ -8,8 +9,9 @@ export const Container = styled.ImageBackground`
 `;
 
 export const Title = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
+  font-size: ${RFValue(30)}px;
+  font-family: ${({ theme }) => theme.fonts.martel_400};
+  font-weight: 400;
 `;
 
 export const OverLayButtomImage = styled.Image`
