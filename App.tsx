@@ -20,6 +20,8 @@ import {
   Livvic_900Black,
 } from "@expo-google-fonts/livvic";
 import { Loading } from "./src/components/Loading";
+import theme from "./src/styles/theme";
+import { ThemeProvider } from "styled-components/native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -40,15 +42,17 @@ export default function App() {
     return <Loading />;
   }
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar
-          barStyle={Platform.OS === "ios" ? "dark-content" : "default"}
-          translucent
-          backgroundColor="transparent"
-        />
-        <AppStackRoutes />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <ThemeProvider theme={theme}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <StatusBar
+            barStyle={Platform.OS === "ios" ? "dark-content" : "default"}
+            translucent
+            backgroundColor="transparent"
+          />
+          <AppStackRoutes />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }
