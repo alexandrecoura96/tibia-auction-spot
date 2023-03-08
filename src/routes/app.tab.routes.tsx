@@ -4,6 +4,10 @@ import Icon from "@expo/vector-icons/MaterialIcons";
 import CommunityIcon from "@expo/vector-icons/MaterialCommunityIcons";
 import { CurrentAuction } from "../screens/CurrentAuction";
 import { HistoryAuction } from "../screens/HistoryAuction";
+import HelmetSvg from "../assets/svg/helmet.svg";
+import CompassSvg from "../assets/svg/compass.svg";
+import AlertSvg from "../assets/svg/alert.svg";
+import { Alert } from "../screens/Alert";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +16,7 @@ export function AppTabRoutes() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarStyle: { backgroundColor: "#F1E0C6" },
       }}
     >
       <Tab.Screen
@@ -19,16 +24,11 @@ export function AppTabRoutes() {
         component={CurrentAuction}
         options={{
           headerShown: false,
-          tabBarLabel: "Current",
-          tabBarInactiveTintColor: "#979797",
-          tabBarActiveTintColor: "#116d3a",
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="shopping-cart"
-              size={25}
-              color={focused ? "#116d3a" : "#979797"}
-            />
-          ),
+          tabBarLabel: "Bazar",
+          tabBarInactiveTintColor: "#C98608",
+          tabBarActiveTintColor: "#5A2800",
+
+          tabBarIcon: () => <HelmetSvg />,
         }}
       />
 
@@ -38,52 +38,23 @@ export function AppTabRoutes() {
         options={{
           headerShown: false,
           tabBarLabel: "History",
-          tabBarInactiveTintColor: "#979797",
-          tabBarActiveTintColor: "#116d3a",
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="history"
-              size={25}
-              color={focused ? "#116d3a" : "#979797"}
-            />
-          ),
+          tabBarInactiveTintColor: "#C98608",
+          tabBarActiveTintColor: "#5A2800",
+          tabBarIcon: () => <CompassSvg />,
         }}
       />
 
-      {/* <Tab.Screen
-        name="Locations"
-        component={Locations}
+      <Tab.Screen
+        name="Alert"
+        component={Alert}
         options={{
           headerShown: false,
-          tabBarLabel: "Locations",
-          tabBarInactiveTintColor: "#979797",
-          tabBarActiveTintColor: "#116d3a",
-          tabBarIcon: ({ focused }) => (
-            <CommunityIcon
-              name="map-marker-outline"
-              size={25}
-              color={focused ? "#116d3a" : "#979797"}
-            />
-          ),
+          tabBarLabel: "Alert",
+          tabBarInactiveTintColor: "#C98608",
+          tabBarActiveTintColor: "#5A2800",
+          tabBarIcon: () => <AlertSvg />,
         }}
       />
-      <Tab.Screen
-        name="Episodes"
-        component={Episodes}
-        options={{
-          headerShown: false,
-          tabBarLabel: "Episodes",
-          tabBarInactiveTintColor: "#979797",
-          tabBarActiveTintColor: "#116d3a",
-          tabBarIcon: ({ focused }) => (
-            <CommunityIcon
-              name="play-box-outline"
-              size={25}
-              color={focused ? "#116d3a" : "#979797"}
-            />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 }
