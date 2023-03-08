@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/stack";
 import { AppTabRoutes } from "./app.tab.routes";
 import { Initial } from "../screens/Initial";
+import { CharacterDetails } from "../screens/CharacterDetails";
 
 const Stack = createStackNavigator();
 
@@ -47,15 +48,15 @@ export function AppStackRoutes() {
           cardStyleInterpolator: cardStyleInterpolatorAnim,
         }}
       />
-      {/* <Stack.Screen
-        name="CharacterDetail"
-        component={CharacterDetail}
+      <Stack.Screen
+        name="CharacterDetails"
+        component={CharacterDetails}
         options={{
           headerShown: false,
           gestureDirection: "horizontal",
           cardStyleInterpolator: cardStyleInterpolatorAnim,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }
