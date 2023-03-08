@@ -40,8 +40,15 @@ export function HistoryAuction() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator size={32} color="#00CB00" />
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#FFF0D9",
+        }}
+      >
+        <ActivityIndicator size={32} color="#5A2800" />
       </View>
     );
   }
