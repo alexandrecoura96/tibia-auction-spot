@@ -11,7 +11,13 @@ export const Container = styled.ImageBackground`
 export const Title = styled.Text`
   font-size: ${RFValue(30)}px;
   font-family: ${({ theme }) => theme.fonts.martel_400};
-  font-weight: 400;
+  color: ${({ theme }) => theme.colors.text_primary.primary};
+`;
+
+export const Description = styled.Text`
+  font-size: ${RFValue(20)}px;
+  font-family: ${({ theme }) => theme.fonts.livvic_500};
+  color: ${({ theme }) => theme.colors.text_primary.primary};
 `;
 
 export const OverLayButtomImage = styled.Image`

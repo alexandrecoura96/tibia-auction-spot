@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
 import {
   Dimensions,
@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Container, Title, OverLayButtomImage } from "./styles";
+import { Container, Title, OverLayButtomImage, Description } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { EnterButton } from "../../components/EnterButton";
 
@@ -18,9 +18,12 @@ const backgroundImage = require("../../assets/fankit_offline_female.jpg");
 const overlayBottomImage = require("../../assets/overlay_bottom3.png");
 const tibiaDragonLogo = require("../../assets/tibia_dragon_logo.png");
 const panelSimple = require("../../assets/panel_simple.png");
-const sprite1 = require("../../assets/sprite1.png");
+const grovebeast = require("../../assets/grovebeast.gif");
+const skullfrost = require("../../assets/skullfrost.gif");
+const thundergiant = require("../../assets/thundergiant.gif");
 
 export function Initial() {
+  const theme = useTheme();
   const navigate = useNavigation();
   return (
     <Container
@@ -62,28 +65,31 @@ export function Initial() {
                 justifyContent: "center",
               }}
             >
-              <Title
-                style={{ color: "#CBA88E", fontSize: 30, fontWeight: "400" }}
-              >
-                Welcome Tibians
-              </Title>
+              <Title>Welcome Tibians</Title>
             </ImageBackground>
           </View>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-evenly",
-
               width: "100%",
+              paddingHorizontal: 32,
             }}
           >
-            <Image source={sprite1} style={{ width: 55.37, height: 61.36 }} />
-            <Image source={sprite1} style={{ width: 55.37, height: 61.36 }} />
-            <Image source={sprite1} style={{ width: 55.37, height: 61.36 }} />
+            <Image
+              source={grovebeast}
+              style={{ width: 55.37, height: 61.36 }}
+            />
+            <Image
+              source={skullfrost}
+              style={{ width: 55.37, height: 61.36 }}
+            />
+            <Image
+              source={thundergiant}
+              style={{ width: 55.37, height: 61.36 }}
+            />
           </View>
-          <Title style={{ color: "#CBA88E", fontSize: 20, fontWeight: "500" }}>
-            Follow the Bazaar and save time
-          </Title>
+          <Description>Follow the Bazaar and save time</Description>
           <EnterButton onPress={() => navigate.navigate("Home")} />
           <OverLayButtomImage source={overlayBottomImage} resizeMode="cover" />
         </View>
