@@ -9,4 +9,5 @@ export interface DataType {
   bid: string;
   outfitUrl: string;
   charactersFeatures: Array<string>;
+  inProgress: string;
 }

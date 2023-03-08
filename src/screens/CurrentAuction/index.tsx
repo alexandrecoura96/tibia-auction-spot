@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -8,15 +9,21 @@ import {
   StatusBar,
   Image,
   ActivityIndicator,
+  ImageBackground,
+  Dimensions,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { CharacterCard } from "../../components/CharacterCard";
+import { CharacterResultCard } from "../../components/CharacterResultCard";
 import { api } from "../../libs/axios";
+import { HeaderTitle } from "./styles";
 import { DataType } from "./types";
+
+const header_background = require("../../assets/header_background.png");
 
 export function CurrentAuction() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<DataType[]>([]);
+  const navigate = useNavigation();
 
   async function fetchCurrentBazarList() {
     try {
@@ -41,16 +48,19 @@ export function CurrentAuction() {
 
   if (loading) {
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#FFF0D9",
-        }}
-      >
-        <ActivityIndicator size={32} color="#5A2800" />
-      </View>
+      <>
+        <StatusBar barStyle="dark-content" />
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#FFF0D9",
+          }}
+        >
+          <ActivityIndicator size={32} color="#5A2800" />
+        </View>
+      </>
     );
   }
 
@@ -60,62 +70,47 @@ export function CurrentAuction() {
       <FlatList
         data={data}
         keyExtractor={(item, index) => `${item.name} + ${index}`}
+        ListHeaderComponentStyle={{
+          marginTop: StatusBar.currentHeight,
+        }}
         ListHeaderComponent={
-          <View
-            style={{
-              height: 48,
-              width: "100%",
-              backgroundColor: "#5F4D41",
-              marginTop: StatusBar.currentHeight,
-            }}
-          />
+          <View>
+            <ImageBackground
+              source={header_background}
+              resizeMode="contain"
+              style={{
+                height: 48,
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <HeaderTitle>Current Auctions</HeaderTitle>
+            </ImageBackground>
+            <Text
+              style={{
+                color: "#5A2800",
+                fontSize: 12,
+                fontWeight: "600",
+                paddingTop: 16,
+                paddingRight: 31,
+                alignSelf: "flex-end",
+              }}
+            >
+              » Results: 3,196
+            </Text>
+          </View>
         }
         contentContainerStyle={{ backgroundColor: "#FFF0D9" }}
-        ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        // ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         renderItem={({ item }) => {
           return (
-            <View style={{ padding: 16 }}>
-              <CharacterCard {...item} />
+            <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
+              <CharacterResultCard
+                {...item}
+                onPress={() => navigate.navigate("CharacterDetails", { item })}
+              />
             </View>
-
-            // <View
-            //   style={{
-            //     borderWidth: 0.5,
-            //     borderColor: "#f1e0c6",
-            //     marginTop: 8,
-            //     borderRadius: 8,
-            //     padding: 16,
-            //     backgroundColor: "#f1e0c6",
-            //   }}
-            // >
-            //   <View
-            //     style={{
-            //       flexDirection: "row",
-            //       alignItems: "center",
-            //       justifyContent: "space-between",
-            //       flex: 1,
-            //     }}
-            //   >
-            //     <Image
-            //       source={{ uri: item.outfitUrl }}
-            //       style={{
-            //         height: 100,
-            //         width: 100,
-            //       }}
-            //     />
-            //     <View>
-            //       <Text>Name: {item.name}</Text>
-            //       <Text>Vocation: {item.vocation}</Text>
-            //       <Text>Level: {item.level}</Text>
-            //       <Text>World: {item.world}</Text>
-            //     </View>
-            //   </View>
-            //   <View style={{ marginTop: 24 }}>
-            //     <Text>Current Bid: {item.bid}</Text>
-            //     <Text>Auction Start: {item.auctionStart}</Text>
-            //     <Text>Auction End: {item.auctionEnd}</Text>
-            //   </View>
-            // </View>
           );
         }}
       />
