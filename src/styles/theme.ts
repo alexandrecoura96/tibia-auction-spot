@@ -8,6 +8,7 @@ export default {
       tertiary: "#D4C0A1",
       quaternary: "#5F4D41",
     },
+    success: "#238662",
     text_primary: {
       primary: "#CBA88E",
       secondary: "#5A2800",
@@ -31,6 +32,7 @@ export default {
     common: {
       black: "#000000",
       white: "#FFFFFF",
+      neutral: "#FFF0D9",
     },
   },
   fonts: {
