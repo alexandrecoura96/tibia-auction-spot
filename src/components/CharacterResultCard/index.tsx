@@ -40,10 +40,6 @@ export function CharacterResultCard({
   isFinished,
 }: CharacterResultCardProps) {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(Number(auctionEnd)));
-  const formattedAuctionEnd = new Date(Number(auctionEnd) * 1000);
-  const formattedDate = `${dayjs(formattedAuctionEnd).format(
-    "MMM DD YYYY, HH:mm"
-  )} CET`;
 
   const bidLabel =
     inProgress.valueOf() === "Current Bid:" || "Winning Bid:"
@@ -68,15 +64,15 @@ export function CharacterResultCard({
               <LabelWrapper>
                 <Label>{bidLabel}</Label>
                 <Bid>{bid}</Bid>
-                {/* <Image
-                source={tibiaCoin}
-                style={{
-                  alignSelf: "center",
-                  marginLeft: 8,
-                  height: 12,
-                  width: 12,
-                }}
-              /> */}
+                <Image
+                  source={tibiaCoin}
+                  style={{
+                    alignSelf: "center",
+                    marginLeft: 4,
+                    height: 12,
+                    width: 12,
+                  }}
+                />
               </LabelWrapper>
             </CharacterContent>
 
@@ -105,7 +101,9 @@ export function CharacterResultCard({
             </LabelWrapper>
             <LabelWrapper style={{ marginTop: 8 }}>
               <Label>Auction End:</Label>
-              <AuctionEnd>{isFinished ? formattedDate : timeLeft}</AuctionEnd>
+              <AuctionEnd isFinished={isFinished}>
+                {isFinished ? auctionEnd : timeLeft}
+              </AuctionEnd>
             </LabelWrapper>
             {isFinished && (
               <LabelWrapper style={{ marginTop: 8 }}>
@@ -120,10 +118,10 @@ export function CharacterResultCard({
       </Container>
     );
   }, [
+    auctionEnd,
     auctionStart,
     bid,
     bidLabel,
-    formattedDate,
     isFinished,
     level,
     name,

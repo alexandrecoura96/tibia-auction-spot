@@ -6,6 +6,10 @@ interface StatusLabelProps {
   status?: string;
 }
 
+interface AuctionEndProps {
+  isFinished?: boolean;
+}
+
 export const BoxShadow = styled(Shadow).attrs({
   distance: 10,
   offset: [0, 2],
@@ -42,7 +46,9 @@ export const CharacterOutfit = styled.Image`
   align-self: center;
 `;
 
-export const CharacterContent = styled.View``;
+export const CharacterContent = styled.View`
+  justify-content: space-between;
+`;
 
 export const CharacterDetails = styled.View`
   flex: 1;
@@ -92,12 +98,18 @@ export const Bid = styled.Text`
   margin-left: ${RFValue(4)}px;
 `;
 
-export const AuctionEnd = styled.Text`
+export const AuctionEnd = styled.Text<AuctionEndProps>`
   font-family: ${({ theme }) => theme.fonts.livvic_500};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
   color: ${({ theme }) => theme.colors.alert};
   margin-left: ${RFValue(4)}px;
+
+  ${(props) =>
+    props.isFinished &&
+    css`
+      color: ${({ theme }) => theme.colors.common.black};
+    `};
 `;
 
 export const StatusLabel = styled.Text<StatusLabelProps>`
