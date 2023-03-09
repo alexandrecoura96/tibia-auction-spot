@@ -1,7 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Icon from "@expo/vector-icons/MaterialIcons";
-import CommunityIcon from "@expo/vector-icons/MaterialCommunityIcons";
 import { CurrentAuction } from "../screens/CurrentAuction";
 import { HistoryAuction } from "../screens/HistoryAuction";
 import HelmetSvg from "../assets/svg/helmet.svg";
