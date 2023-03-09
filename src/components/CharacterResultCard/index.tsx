@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -16,11 +15,10 @@ import {
   Bid,
   AuctionEnd,
   BoxShadow,
+  CharacterOutfit,
 } from "./styles";
 import { CharacterResultCardProps } from "./types";
-import duration from "dayjs/plugin/duration";
 import { getTimeLeft } from "../../utils/countdown";
-dayjs.extend(duration);
 
 const searchIcon = require("../../assets/search.png");
 const tibiaCoin = require("../../assets/tibia_coin.png");
@@ -38,7 +36,6 @@ export function CharacterResultCard({
   onPress,
 }: CharacterResultCardProps) {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(Number(auctionEnd)));
-  const now = dayjs();
   const bidLabel =
     inProgress === "Current Bid:" ? "Current Bid:" : "Minimum Bid:";
 
@@ -55,16 +52,7 @@ export function CharacterResultCard({
       <BoxShadow>
         <CharacterWrapper>
           <CharacterContent>
-            <Image
-              source={{ uri: outfitUrl }}
-              style={{
-                height: 80,
-                width: 80,
-                bottom: 20,
-                right: 30,
-                alignSelf: "center",
-              }}
-            />
+            <CharacterOutfit source={{ uri: outfitUrl }} />
 
             <LabelWrapper>
               <Label>{bidLabel}</Label>
