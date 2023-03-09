@@ -21,5 +21,5 @@ export const Description = styled.Text`
 
 export const OverLayButtomImage = styled.Image`
   width: 100%;
-  height: 105px;
+  height: ${RFValue(105)}px;
 `;
