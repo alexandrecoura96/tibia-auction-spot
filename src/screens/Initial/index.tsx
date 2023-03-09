@@ -1,15 +1,6 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
-import {
-  Dimensions,
-  Image,
-  ImageBackground,
-  Platform,
-  StatusBar,
-  Text,
-  View,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Image, ImageBackground, StatusBar, View } from "react-native";
 import { Container, Title, OverLayButtomImage, Description } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { EnterButton } from "../../components/EnterButton";
