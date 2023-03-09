@@ -39,7 +39,11 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <Loading />;
+    return (
+      <ThemeProvider theme={theme}>
+        <Loading />
+      </ThemeProvider>
+    );
   }
   return (
     <ThemeProvider theme={theme}>
