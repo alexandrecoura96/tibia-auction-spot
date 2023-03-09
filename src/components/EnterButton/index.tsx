@@ -1,9 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { TouchableOpacityProps, Text, View } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 import { LinearGradientTitle } from "../LinearGradientTitle";
-
-import { ButtonName, Container } from "./styles";
+import { Container } from "./styles";
 
 interface IEnterButtonProps extends TouchableOpacityProps {}
 
