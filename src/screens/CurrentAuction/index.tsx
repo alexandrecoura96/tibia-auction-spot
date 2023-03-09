@@ -2,15 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   Alert,
-  SafeAreaView,
-  ScrollView,
   Text,
   View,
   StatusBar,
-  Image,
   ActivityIndicator,
   ImageBackground,
-  Dimensions,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { CharacterResultCard } from "../../components/CharacterResultCard";
@@ -101,7 +97,10 @@ export function CurrentAuction() {
             </Text>
           </View>
         }
-        contentContainerStyle={{ backgroundColor: "#FFF0D9" }}
+        contentContainerStyle={{
+          backgroundColor: "#FFF0D9",
+          paddingBottom: 80,
+        }}
         // ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         renderItem={({ item }) => {
           return (
