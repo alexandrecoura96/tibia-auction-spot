@@ -1,3 +1,4 @@
+import { CharacterResultCardProps } from "./src/components/CharacterResultCard/types";
 import {
   Character,
   Episode,
@@ -9,7 +10,7 @@ export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       Home: undefined;
-      CharacterDetails: { item: DataType };
+      CharacterDetails: { item: CharacterResultCardProps };
     }
   }
 }
