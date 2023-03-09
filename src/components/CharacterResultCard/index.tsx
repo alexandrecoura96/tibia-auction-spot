@@ -17,12 +17,17 @@ import {
   BoxShadow,
   CharacterOutfit,
   StatusLabel,
+  TibiaCoin,
+  UpsideContainer,
+  DownsideContainer,
 } from "./styles";
 import { CharacterResultCardProps } from "./types";
 import { getTimeLeft } from "../../utils/countdown";
 import dayjs from "dayjs";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const searchIcon = require("../../assets/search.png");
+
 const tibiaCoin = require("../../assets/tibia_coin.png");
 
 export function CharacterResultCard({
@@ -59,38 +64,35 @@ export function CharacterResultCard({
       <Container>
         <BoxShadow>
           <CharacterWrapper>
-            <CharacterContent>
-              <CharacterOutfit source={{ uri: outfitUrl }} />
+            <UpsideContainer>
+              <CharacterContent>
+                <CharacterOutfit source={{ uri: outfitUrl }} />
+              </CharacterContent>
+              <CharacterDetails>
+                <Title>{name}</Title>
+                <LabelWrapper style={{ marginTop: RFValue(8) }}>
+                  <Label>Vocation:</Label>
+                  <LabelContent>{vocation}</LabelContent>
+                </LabelWrapper>
+                <LabelWrapper style={{ marginTop: RFValue(8) }}>
+                  <Label>Level:</Label>
+                  <LabelContent>{level}</LabelContent>
+                </LabelWrapper>
+              </CharacterDetails>
+            </UpsideContainer>
+            <DownsideContainer>
               <LabelWrapper>
                 <Label>{bidLabel}</Label>
-                <Bid>{bid}</Bid>
-                <Image
-                  source={tibiaCoin}
-                  style={{
-                    alignSelf: "center",
-                    marginLeft: 4,
-                    height: 12,
-                    width: 12,
-                  }}
-                />
+                <Bid style={{ maxWidth: RFValue(70) }} numberOfLines={1}>
+                  {bid}
+                </Bid>
+                <TibiaCoin source={tibiaCoin} />
               </LabelWrapper>
-            </CharacterContent>
-
-            <CharacterDetails>
-              <Title>{name}</Title>
-              <LabelWrapper style={{ marginTop: 8 }}>
-                <Label>Vocation:</Label>
-                <LabelContent>{vocation}</LabelContent>
-              </LabelWrapper>
-              <LabelWrapper style={{ marginTop: 8 }}>
-                <Label>Level:</Label>
-                <LabelContent>{level}</LabelContent>
-              </LabelWrapper>
-              <LabelWrapper style={{ marginTop: 8 }}>
+              <LabelWrapper>
                 <Label>World:</Label>
                 <WorldName>{world}</WorldName>
               </LabelWrapper>
-            </CharacterDetails>
+            </DownsideContainer>
           </CharacterWrapper>
         </BoxShadow>
         <BazarDetailsWrapper>
@@ -99,14 +101,14 @@ export function CharacterResultCard({
               <Label>Auction Start:</Label>
               <LabelContent>{auctionStart}</LabelContent>
             </LabelWrapper>
-            <LabelWrapper style={{ marginTop: 8 }}>
+            <LabelWrapper style={{ marginTop: RFValue(8) }}>
               <Label>Auction End:</Label>
               <AuctionEnd isFinished={isFinished}>
                 {isFinished ? auctionEnd : timeLeft}
               </AuctionEnd>
             </LabelWrapper>
             {isFinished && (
-              <LabelWrapper style={{ marginTop: 8 }}>
+              <LabelWrapper style={{ marginTop: RFValue(8) }}>
                 <StatusLabel status={status}>{status}</StatusLabel>
               </LabelWrapper>
             )}

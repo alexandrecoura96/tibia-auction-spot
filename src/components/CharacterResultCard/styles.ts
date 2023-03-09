@@ -18,12 +18,25 @@ export const BoxShadow = styled(Shadow).attrs({
   border-radius: ${RFValue(16)}px;
 `;
 
+export const UpsideContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+export const DownsideContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const Container = styled.View`
   border: 1px solid #5a2800;
   background-color: ${({ theme }) => theme.colors.background.tertiary};
   padding: ${RFValue(16)}px;
 `;
-export const Title = styled.Text`
+export const Title = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
@@ -34,20 +47,27 @@ export const CharacterWrapper = styled.View`
   padding: ${RFValue(10)}px;
   background-color: ${({ theme }) => theme.colors.background.secondary};
   border: 1px solid #5a2800;
-  flex-direction: row;
   justify-content: space-between;
 `;
 
-export const CharacterOutfit = styled.Image`
+export const TibiaCoin = styled.Image`
+  height: ${RFValue(12)}px;
+  width: ${RFValue(12)}px;
+  margin-left: ${RFValue(4)}px;
+  align-self: center;
+`;
+
+export const CharacterOutfit = styled.Image.attrs({
+  resizeMode: "contain",
+})`
   height: ${RFValue(80)}px;
   width: ${RFValue(80)}px;
   bottom: ${RFValue(20)}px;
-  right: ${RFValue(30)}px;
-  align-self: center;
 `;
 
 export const CharacterContent = styled.View`
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const CharacterDetails = styled.View`
