@@ -1,8 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { TouchableOpacityProps, Text } from "react-native";
+import { TouchableOpacityProps, Text, View } from "react-native";
+import { LinearGradientTitle } from "../LinearGradientTitle";
 
-import { Container } from "./styles";
+import { ButtonName, Container } from "./styles";
 
 interface IEnterButtonProps extends TouchableOpacityProps {}
 
@@ -34,9 +35,7 @@ export function EnterButton({ ...props }: IEnterButtonProps) {
           justifyContent: "center",
         }}
       >
-        <Text style={{ color: "#F9D553", fontSize: 24, fontWeight: "bold" }}>
-          To Start
-        </Text>
+        <LinearGradientTitle title="To Start" />
       </LinearGradient>
     </Container>
   );
