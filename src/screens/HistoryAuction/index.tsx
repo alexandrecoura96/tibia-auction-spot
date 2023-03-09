@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  StatusBar,
-  ActivityIndicator,
-  Image,
-} from "react-native";
+import { Alert, Text, View, ActivityIndicator, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { api } from "../../libs/axios";
 import { DataType } from "../CurrentAuction/types";
