@@ -19,16 +19,18 @@ export function getTimeLeft(auctionEnd: number) {
   const seconds = duration.seconds();
 
   if (days > 0) {
-    return `${days}d ${hours}h ${minutes}m ${seconds}s, ${end
+    return `in ${days}d ${hours}h ${minutes}m ${seconds}s, ${end
       .add(1, "hour")
       .format("HH:mm")}`;
   } else if (hours > 0) {
-    return `${hours}h ${minutes}m ${seconds}s, ${end
+    return `in ${hours}h ${minutes}m ${seconds}s, ${end
       .add(1, "hour")
       .format("HH:mm CET")}`;
   } else if (minutes > 0) {
-    return `${minutes}m ${seconds}s, ${end.add(1, "hour").format("HH:mm CET")}`;
+    return `in ${minutes}m ${seconds}s, ${end
+      .add(1, "hour")
+      .format("HH:mm CET")}`;
   } else {
-    return `${seconds}s, ${end.add(1, "hour").format("HH:mm CET")}`;
+    return `in ${seconds}s, ${end.add(1, "hour").format("HH:mm CET")}`;
   }
 }
