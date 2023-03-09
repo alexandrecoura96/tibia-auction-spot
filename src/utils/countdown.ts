@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
+dayjs.extend(utc);
+
 export function getTimeLeft(auctionEnd: number) {
   const now = dayjs().utc();
   const end = dayjs.unix(auctionEnd).utc();
