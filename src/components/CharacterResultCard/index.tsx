@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -18,6 +18,9 @@ import {
   BoxShadow,
 } from "./styles";
 import { CharacterResultCardProps } from "./types";
+import duration from "dayjs/plugin/duration";
+import { getTimeLeft } from "../../utils/countdown";
+dayjs.extend(duration);
 
 const searchIcon = require("../../assets/search.png");
 const tibiaCoin = require("../../assets/tibia_coin.png");
@@ -34,9 +37,19 @@ export function CharacterResultCard({
   inProgress,
   onPress,
 }: CharacterResultCardProps) {
-  const date = new Date(Number(auctionEnd) * 1000);
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(Number(auctionEnd)));
+  const now = dayjs();
   const bidLabel =
     inProgress === "Current Bid:" ? "Current Bid:" : "Minimum Bid:";
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(getTimeLeft(Number(auctionEnd)));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [auctionEnd]);
+
   return (
     <Container>
       <BoxShadow>
@@ -88,9 +101,12 @@ export function CharacterResultCard({
           </LabelWrapper>
           <LabelWrapper style={{ marginTop: 8 }}>
             <Label>Auction End:</Label>
-            <AuctionEnd>{`${dayjs(date).format(
-              "MMM DD YYYY, HH:mm"
-            )} CET`}</AuctionEnd>
+
+            <AuctionEnd>
+              {auctionEnd === now.format()
+                ? "Auction Ended!"
+                : `in ${timeLeft}`}
+            </AuctionEnd>
           </LabelWrapper>
         </View>
         <TouchableOpacity onPress={onPress}>
