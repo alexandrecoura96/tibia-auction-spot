@@ -101,12 +101,7 @@ export function CharacterResultCard({
           </LabelWrapper>
           <LabelWrapper style={{ marginTop: 8 }}>
             <Label>Auction End:</Label>
-
-            <AuctionEnd>
-              {auctionEnd === now.format()
-                ? "Auction Ended!"
-                : `in ${timeLeft}`}
-            </AuctionEnd>
+            <AuctionEnd>{timeLeft}</AuctionEnd>
           </LabelWrapper>
         </View>
         <TouchableOpacity onPress={onPress}>
