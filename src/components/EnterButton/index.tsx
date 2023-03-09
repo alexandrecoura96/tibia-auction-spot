@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { TouchableOpacityProps } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { LinearGradientTitle } from "../LinearGradientTitle";
 import { Container } from "./styles";
 
@@ -28,8 +29,8 @@ export function EnterButton({ ...props }: IEnterButtonProps) {
           borderRadius: 4,
           borderWidth: 2,
           borderColor: "#000",
-          height: 52,
-          width: 240,
+          height: RFValue(52),
+          width: RFValue(240),
           alignItems: "center",
           justifyContent: "center",
         }}
