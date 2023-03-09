@@ -10,4 +10,5 @@ export interface DataType {
   outfitUrl: string;
   charactersFeatures: Array<string>;
   inProgress: string;
+  status?: string;
 }

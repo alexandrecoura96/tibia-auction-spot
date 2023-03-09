@@ -1,20 +1,20 @@
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Alert,
-  Text,
   View,
   StatusBar,
   ActivityIndicator,
-  ImageBackground,
+  ListRenderItemInfo,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { CharacterResultCard } from "../../components/CharacterResultCard";
+import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
+import { Header } from "../../components/Header";
+import { LoadingScreen } from "../../components/LoadingScreen";
 import { api } from "../../libs/axios";
-import { HeaderTitle } from "./styles";
 import { DataType } from "./types";
-
-const header_background = require("../../assets/header_background.png");
 
 export function CurrentAuction() {
   const [loading, setLoading] = useState(true);
@@ -38,26 +38,24 @@ export function CurrentAuction() {
     }
   }
 
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<CharacterResultCardProps>) => (
+      <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
+        <CharacterResultCard
+          {...item}
+          onPress={() => navigate.navigate("CharacterDetails", { item })}
+        />
+      </View>
+    ),
+    [navigate]
+  );
+
   useEffect(() => {
     fetchCurrentBazarList();
   }, []);
 
   if (loading) {
-    return (
-      <>
-        <StatusBar barStyle="dark-content" />
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#FFF0D9",
-          }}
-        >
-          <ActivityIndicator size={32} color="#5A2800" />
-        </View>
-      </>
-    );
+    return <LoadingScreen />;
   }
 
   return (
@@ -70,48 +68,16 @@ export function CurrentAuction() {
           marginTop: StatusBar.currentHeight,
         }}
         ListHeaderComponent={
-          <View>
-            <ImageBackground
-              source={header_background}
-              resizeMode="contain"
-              style={{
-                height: 48,
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <HeaderTitle>Current Auctions</HeaderTitle>
-            </ImageBackground>
-            <Text
-              style={{
-                color: "#5A2800",
-                fontSize: 12,
-                fontWeight: "600",
-                paddingTop: 16,
-                paddingRight: 31,
-                alignSelf: "flex-end",
-              }}
-            >
-              » Results: 3,196
-            </Text>
-          </View>
+          <Header
+            title="Current Auctions"
+            resultDescription="» Results: 3,196"
+          />
         }
         contentContainerStyle={{
           backgroundColor: "#FFF0D9",
           paddingBottom: 80,
         }}
-        // ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
-        renderItem={({ item }) => {
-          return (
-            <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
-              <CharacterResultCard
-                {...item}
-                onPress={() => navigate.navigate("CharacterDetails", { item })}
-              />
-            </View>
-          );
-        }}
+        renderItem={renderItem}
       />
     </>
   );
