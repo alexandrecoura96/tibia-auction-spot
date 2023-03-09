@@ -1,6 +1,10 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import { Shadow } from "react-native-shadow-2";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
+
+interface StatusLabelProps {
+  status?: string;
+}
 
 export const BoxShadow = styled(Shadow).attrs({
   distance: 10,
@@ -94,4 +98,22 @@ export const AuctionEnd = styled.Text`
   line-height: ${RFValue(18)}px;
   color: ${({ theme }) => theme.colors.alert};
   margin-left: ${RFValue(4)}px;
+`;
+
+export const StatusLabel = styled.Text<StatusLabelProps>`
+  font-family: ${({ theme }) => theme.fonts.livvic_500};
+  font-size: ${RFValue(14)}px;
+  line-height: ${RFValue(18)}px;
+  margin-left: ${RFValue(4)}px;
+  ${(props) =>
+    props.status === "finished" &&
+    css`
+      color: ${({ theme }) => theme.colors.success};
+    `};
+
+  ${(props) =>
+    props.status === "cancelled" &&
+    css`
+      color: ${({ theme }) => theme.colors.tertiary};
+    `};
 `;

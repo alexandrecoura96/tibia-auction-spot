@@ -9,4 +9,6 @@ export interface CharacterResultCardProps {
   outfitUrl: string;
   onPress?: () => void;
   inProgress: string;
+  isFinished?: boolean;
+  status?: string;
 }

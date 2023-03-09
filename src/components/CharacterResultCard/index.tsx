@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -16,9 +16,11 @@ import {
   AuctionEnd,
   BoxShadow,
   CharacterOutfit,
+  StatusLabel,
 } from "./styles";
 import { CharacterResultCardProps } from "./types";
 import { getTimeLeft } from "../../utils/countdown";
+import dayjs from "dayjs";
 
 const searchIcon = require("../../assets/search.png");
 const tibiaCoin = require("../../assets/tibia_coin.png");
@@ -34,10 +36,19 @@ export function CharacterResultCard({
   outfitUrl,
   inProgress,
   onPress,
+  status,
+  isFinished,
 }: CharacterResultCardProps) {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(Number(auctionEnd)));
+  const formattedAuctionEnd = new Date(Number(auctionEnd) * 1000);
+  const formattedDate = `${dayjs(formattedAuctionEnd).format(
+    "MMM DD YYYY, HH:mm"
+  )} CET`;
+
   const bidLabel =
-    inProgress === "Current Bid:" ? "Current Bid:" : "Minimum Bid:";
+    inProgress.valueOf() === "Current Bid:" || "Winning Bid:"
+      ? inProgress.valueOf()
+      : "Minimum Bid:";
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,16 +58,17 @@ export function CharacterResultCard({
     return () => clearInterval(interval);
   }, [auctionEnd]);
 
-  return (
-    <Container>
-      <BoxShadow>
-        <CharacterWrapper>
-          <CharacterContent>
-            <CharacterOutfit source={{ uri: outfitUrl }} />
-            <LabelWrapper>
-              <Label>{bidLabel}</Label>
-              <Bid>{bid}</Bid>
-              {/* <Image
+  const renderContent = useCallback(() => {
+    return (
+      <Container>
+        <BoxShadow>
+          <CharacterWrapper>
+            <CharacterContent>
+              <CharacterOutfit source={{ uri: outfitUrl }} />
+              <LabelWrapper>
+                <Label>{bidLabel}</Label>
+                <Bid>{bid}</Bid>
+                {/* <Image
                 source={tibiaCoin}
                 style={{
                   alignSelf: "center",
@@ -65,41 +77,63 @@ export function CharacterResultCard({
                   width: 12,
                 }}
               /> */}
-            </LabelWrapper>
-          </CharacterContent>
+              </LabelWrapper>
+            </CharacterContent>
 
-          <CharacterDetails>
-            <Title>{name}</Title>
-            <LabelWrapper style={{ marginTop: 8 }}>
-              <Label>Vocation:</Label>
-              <LabelContent>{vocation}</LabelContent>
+            <CharacterDetails>
+              <Title>{name}</Title>
+              <LabelWrapper style={{ marginTop: 8 }}>
+                <Label>Vocation:</Label>
+                <LabelContent>{vocation}</LabelContent>
+              </LabelWrapper>
+              <LabelWrapper style={{ marginTop: 8 }}>
+                <Label>Level:</Label>
+                <LabelContent>{level}</LabelContent>
+              </LabelWrapper>
+              <LabelWrapper style={{ marginTop: 8 }}>
+                <Label>World:</Label>
+                <WorldName>{world}</WorldName>
+              </LabelWrapper>
+            </CharacterDetails>
+          </CharacterWrapper>
+        </BoxShadow>
+        <BazarDetailsWrapper>
+          <View>
+            <LabelWrapper>
+              <Label>Auction Start:</Label>
+              <LabelContent>{auctionStart}</LabelContent>
             </LabelWrapper>
             <LabelWrapper style={{ marginTop: 8 }}>
-              <Label>Level:</Label>
-              <LabelContent>{level}</LabelContent>
+              <Label>Auction End:</Label>
+              <AuctionEnd>{isFinished ? formattedDate : timeLeft}</AuctionEnd>
             </LabelWrapper>
-            <LabelWrapper style={{ marginTop: 8 }}>
-              <Label>World:</Label>
-              <WorldName>{world}</WorldName>
-            </LabelWrapper>
-          </CharacterDetails>
-        </CharacterWrapper>
-      </BoxShadow>
-      <BazarDetailsWrapper>
-        <View>
-          <LabelWrapper>
-            <Label>Auction Start:</Label>
-            <LabelContent>{auctionStart}</LabelContent>
-          </LabelWrapper>
-          <LabelWrapper style={{ marginTop: 8 }}>
-            <Label>Auction End:</Label>
-            <AuctionEnd>{timeLeft}</AuctionEnd>
-          </LabelWrapper>
-        </View>
-        <TouchableOpacity onPress={onPress}>
-          <Image source={searchIcon} />
-        </TouchableOpacity>
-      </BazarDetailsWrapper>
-    </Container>
-  );
+            {isFinished && (
+              <LabelWrapper style={{ marginTop: 8 }}>
+                <StatusLabel status={status}>{status}</StatusLabel>
+              </LabelWrapper>
+            )}
+          </View>
+          <TouchableOpacity onPress={onPress}>
+            <Image source={searchIcon} />
+          </TouchableOpacity>
+        </BazarDetailsWrapper>
+      </Container>
+    );
+  }, [
+    auctionStart,
+    bid,
+    bidLabel,
+    formattedDate,
+    isFinished,
+    level,
+    name,
+    onPress,
+    outfitUrl,
+    status,
+    timeLeft,
+    vocation,
+    world,
+  ]);
+
+  return renderContent();
 }
