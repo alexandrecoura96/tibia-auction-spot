@@ -53,14 +53,18 @@ export function CharacterResultCard({
         <CharacterWrapper>
           <CharacterContent>
             <CharacterOutfit source={{ uri: outfitUrl }} />
-
             <LabelWrapper>
               <Label>{bidLabel}</Label>
               <Bid>{bid}</Bid>
-              <Image
+              {/* <Image
                 source={tibiaCoin}
-                style={{ alignSelf: "center", marginLeft: 8 }}
-              />
+                style={{
+                  alignSelf: "center",
+                  marginLeft: 8,
+                  height: 12,
+                  width: 12,
+                }}
+              /> */}
             </LabelWrapper>
           </CharacterContent>
 
