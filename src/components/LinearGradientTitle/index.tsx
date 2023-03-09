@@ -4,12 +4,13 @@ import React from "react";
 import { View } from "react-native";
 import { Title } from "./styles";
 import { LinearGradientTitleProps } from "./types";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export function LinearGradientTitle({ title }: LinearGradientTitleProps) {
   return (
     <MaskedView
       style={{
-        height: 40,
+        height: RFValue(40),
         flexDirection: "row",
       }}
       maskElement={
