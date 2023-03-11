@@ -65,9 +65,6 @@ export function CharacterResultCard({
         <BoxShadow>
           <CharacterWrapper>
             <UpsideContainer>
-              <CharacterContent>
-                <CharacterOutfit source={{ uri: outfitUrl }} />
-              </CharacterContent>
               <CharacterDetails>
                 <Title>{name}</Title>
                 <LabelWrapper style={{ marginTop: RFValue(8) }}>
@@ -79,18 +76,21 @@ export function CharacterResultCard({
                   <LabelContent>{level}</LabelContent>
                 </LabelWrapper>
               </CharacterDetails>
+              <CharacterContent>
+                <CharacterOutfit source={{ uri: outfitUrl }} />
+              </CharacterContent>
             </UpsideContainer>
             <DownsideContainer>
+              <LabelWrapper>
+                <Label>World:</Label>
+                <WorldName>{world}</WorldName>
+              </LabelWrapper>
               <LabelWrapper>
                 <Label>{bidLabel}</Label>
                 <Bid style={{ maxWidth: RFValue(70) }} numberOfLines={1}>
                   {bid}
                 </Bid>
                 <TibiaCoin source={tibiaCoin} />
-              </LabelWrapper>
-              <LabelWrapper>
-                <Label>World:</Label>
-                <WorldName>{world}</WorldName>
               </LabelWrapper>
             </DownsideContainer>
           </CharacterWrapper>

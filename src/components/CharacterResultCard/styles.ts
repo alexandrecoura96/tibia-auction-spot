@@ -62,18 +62,17 @@ export const CharacterOutfit = styled.Image.attrs({
 })`
   height: ${RFValue(80)}px;
   width: ${RFValue(80)}px;
-  bottom: ${RFValue(20)}px;
+  bottom: ${RFValue(16)}px;
+  right: ${RFValue(16)}px;
 `;
 
 export const CharacterContent = styled.View`
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 export const CharacterDetails = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: flex-end;
 `;
 
 export const BazarDetailsWrapper = styled.View`
@@ -83,7 +82,9 @@ export const BazarDetailsWrapper = styled.View`
   align-items: center;
 `;
 
-export const Label = styled.Text`
+export const Label = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-family: ${({ theme }) => theme.fonts.livvic_400};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
@@ -94,7 +95,9 @@ export const LabelWrapper = styled.View`
   flex-direction: row;
 `;
 
-export const LabelContent = styled.Text`
+export const LabelContent = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-family: ${({ theme }) => theme.fonts.livvic_500};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
@@ -102,7 +105,9 @@ export const LabelContent = styled.Text`
   margin-left: ${RFValue(4)}px;
 `;
 
-export const WorldName = styled.Text`
+export const WorldName = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
@@ -110,7 +115,9 @@ export const WorldName = styled.Text`
   margin-left: ${RFValue(4)}px;
 `;
 
-export const Bid = styled.Text`
+export const Bid = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
@@ -118,7 +125,9 @@ export const Bid = styled.Text`
   margin-left: ${RFValue(4)}px;
 `;
 
-export const AuctionEnd = styled.Text<AuctionEndProps>`
+export const AuctionEnd = styled.Text.attrs({
+  numberOfLines: 1,
+})<AuctionEndProps>`
   font-family: ${({ theme }) => theme.fonts.livvic_500};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
@@ -132,7 +141,9 @@ export const AuctionEnd = styled.Text<AuctionEndProps>`
     `};
 `;
 
-export const StatusLabel = styled.Text<StatusLabelProps>`
+export const StatusLabel = styled.Text.attrs({
+  numberOfLines: 1,
+})<StatusLabelProps>`
   font-family: ${({ theme }) => theme.fonts.livvic_500};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
