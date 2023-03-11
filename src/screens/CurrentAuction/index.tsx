@@ -98,7 +98,7 @@ export function CurrentAuction() {
             handleLoadMore();
           }
         }}
-        onEndReachedThreshold={10}
+        onEndReachedThreshold={0.1}
         scrollEventThrottle={16}
         estimatedItemSize={234}
       />
