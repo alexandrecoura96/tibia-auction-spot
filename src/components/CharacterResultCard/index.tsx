@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  PureComponent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Image, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
@@ -30,36 +36,60 @@ const searchIcon = require("../../assets/search.png");
 
 const tibiaCoin = require("../../assets/tibia_coin.png");
 
-export function CharacterResultCard({
-  level,
-  name,
-  vocation,
-  bid,
-  world,
-  auctionStart,
-  auctionEnd,
-  outfitUrl,
-  inProgress,
-  onPress,
-  status,
-  isFinished,
-}: CharacterResultCardProps) {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(Number(auctionEnd)));
+export class CharacterResultCard extends PureComponent<CharacterResultCardProps> {
+  state = {
+    timeLeft: getTimeLeft(Number(this.props.auctionEnd)),
+  };
 
-  const bidLabel =
-    inProgress.valueOf() === "Current Bid:" || "Winning Bid:"
-      ? inProgress.valueOf()
-      : "Minimum Bid:";
+  interval: any;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(getTimeLeft(Number(auctionEnd)));
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.setState({
+        timeLeft: getTimeLeft(Number(this.props.auctionEnd)),
+      });
     }, 1000);
+  }
 
-    return () => clearInterval(interval);
-  }, [auctionEnd]);
+  componentDidUpdate(prevProps: CharacterResultCardProps) {
+    if (prevProps.auctionEnd !== this.props.auctionEnd) {
+      clearInterval(this.interval);
+      this.setState({
+        timeLeft: getTimeLeft(Number(this.props.auctionEnd)),
+      });
+      this.interval = setInterval(() => {
+        this.setState({
+          timeLeft: getTimeLeft(Number(this.props.auctionEnd)),
+        });
+      }, 1000);
+    }
+  }
 
-  const renderContent = useCallback(() => {
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    const {
+      level,
+      name,
+      vocation,
+      bid,
+      world,
+      auctionStart,
+      auctionEnd,
+      outfitUrl,
+      inProgress,
+      onPress,
+      status,
+      isFinished,
+    } = this.props;
+
+    const bidLabel =
+      inProgress.valueOf() === "Current Bid:" || "Winning Bid:"
+        ? inProgress.valueOf()
+        : "Minimum Bid:";
+
     return (
       <Container>
         <BoxShadow>
@@ -104,7 +134,7 @@ export function CharacterResultCard({
             <LabelWrapper style={{ marginTop: RFValue(8) }}>
               <Label>Auction End:</Label>
               <AuctionEnd isFinished={isFinished}>
-                {isFinished ? auctionEnd : timeLeft}
+                {isFinished ? auctionEnd : this.state.timeLeft}
               </AuctionEnd>
             </LabelWrapper>
             {isFinished && (
@@ -119,21 +149,5 @@ export function CharacterResultCard({
         </BazarDetailsWrapper>
       </Container>
     );
-  }, [
-    auctionEnd,
-    auctionStart,
-    bid,
-    bidLabel,
-    isFinished,
-    level,
-    name,
-    onPress,
-    outfitUrl,
-    status,
-    timeLeft,
-    vocation,
-    world,
-  ]);
-
-  return renderContent();
+  }
 }
