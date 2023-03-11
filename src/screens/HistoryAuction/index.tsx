@@ -1,29 +1,35 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, View, StatusBar, ListRenderItemInfo } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { Alert, View, StatusBar, FlatList } from "react-native";
 import { CharacterResultCard } from "../../components/CharacterResultCard";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
 import { Header } from "../../components/Header";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { api } from "../../libs/axios";
 import { DataType } from "../CurrentAuction/types";
+import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
+import { Loading } from "../../components/Loading";
 
 export function HistoryAuction() {
+  const navigate = useNavigation();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<DataType[]>([]);
-  const navigate = useNavigation();
+  const [page, setPage] = useState<any>(1);
+  const [allDataLoaded, setAllDataLoaded] = useState(false);
 
-  async function fetchCurrentBazarList() {
+  async function fetchHistoryBazarList(pageNumber: number) {
     try {
       setLoading(true);
       const response = await api.get("/history", {
-        params: { pageNumber: 1 },
+        params: { pageNumber },
       });
-
-      console.log(response.data);
-      setData(response.data);
+      const newData = response.data;
+      if (newData.length === 0) {
+        setAllDataLoaded(true);
+      } else {
+        setData((prevData) => [...prevData, ...newData]);
+      }
     } catch (error) {
       console.log(error);
       Alert.alert("Ops", "Não possível carregar as informações");
@@ -33,8 +39,8 @@ export function HistoryAuction() {
   }
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<CharacterResultCardProps>) => (
-      <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
+    ({ item, index }: ListRenderItemInfo<CharacterResultCardProps>) => (
+      <View key={index} style={{ paddingHorizontal: 24, paddingTop: 16 }}>
         <CharacterResultCard
           isFinished
           {...item}
@@ -45,18 +51,31 @@ export function HistoryAuction() {
     [navigate]
   );
 
-  useEffect(() => {
-    fetchCurrentBazarList();
-  }, []);
+  const ListFooterComponent = (): JSX.Element => {
+    if (!allDataLoaded && loading) {
+      return <Loading />;
+    }
+    return <></>;
+  };
 
-  if (loading) {
+  const handleLoadMore = useCallback(() => {
+    if (!allDataLoaded && !loading) {
+      setPage((prevPage: any) => prevPage + 1);
+    }
+  }, [allDataLoaded, loading]);
+
+  useEffect(() => {
+    fetchHistoryBazarList(page);
+  }, [page]);
+
+  if (loading && page === 1) {
     return <LoadingScreen />;
   }
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <FlatList
+      <FlashList
         data={data}
         keyExtractor={(item, index) => `${item.name} + ${index}`}
         ListHeaderComponentStyle={{
@@ -73,6 +92,16 @@ export function HistoryAuction() {
           paddingBottom: 80,
         }}
         renderItem={renderItem}
+        ListFooterComponentStyle={{ paddingTop: 24 }}
+        ListFooterComponent={ListFooterComponent}
+        onEndReached={() => {
+          if (!loading) {
+            handleLoadMore();
+          }
+        }}
+        onEndReachedThreshold={0.1}
+        scrollEventThrottle={16}
+        estimatedItemSize={263}
       />
     </>
   );
