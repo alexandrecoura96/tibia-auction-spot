@@ -1,10 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { StatusBar } from "react-native";
+import { Container, Title } from "./styles";
 
 export function Alert() {
   return (
-    <View>
-      <Text>Alert</Text>
-    </View>
+    <Container style={{ paddingTop: StatusBar.currentHeight }}>
+      <StatusBar barStyle="dark-content" />
+      <Title>In construction</Title>
+    </Container>
   );
 }
