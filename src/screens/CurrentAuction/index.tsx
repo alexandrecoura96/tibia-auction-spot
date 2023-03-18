@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, View, StatusBar, FlatList } from "react-native";
@@ -15,7 +15,7 @@ export function CurrentAuction() {
   const navigate = useNavigation();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<DataType[]>([]);
-  const [page, setPage] = useState<any>(1);
+  const [page, setPage] = useState<number>(1);
   const [allDataLoaded, setAllDataLoaded] = useState(false);
 
   async function fetchCurrentBazarList(pageNumber: number) {
@@ -72,7 +72,7 @@ export function CurrentAuction() {
   }
 
   return (
-    <>
+    <View style={{ backgroundColor: "#FFF0D9", flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <FlashList
         data={data}
@@ -102,6 +102,6 @@ export function CurrentAuction() {
         scrollEventThrottle={16}
         estimatedItemSize={234}
       />
-    </>
+    </View>
   );
 }

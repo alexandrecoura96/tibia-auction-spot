@@ -73,7 +73,7 @@ export function HistoryAuction() {
   }
 
   return (
-    <>
+    <View style={{ backgroundColor: "#FFF0D9", flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <FlashList
         data={data}
@@ -103,6 +103,6 @@ export function HistoryAuction() {
         scrollEventThrottle={16}
         estimatedItemSize={263}
       />
-    </>
+    </View>
   );
 }
