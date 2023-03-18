@@ -1,10 +1,11 @@
 import { Route, useNavigation, useRoute } from "@react-navigation/native";
-import { FlashList } from "@shopify/flash-list";
-import React, { useEffect, useState } from "react";
+import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
+import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, StatusBar, Alert } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import { CharacterInsider } from "../../components/CharacterInsider";
 import { GeneralDetails } from "../../components/GeneralDetails";
+import { GeneralDetailProps } from "../../components/GeneralDetails/types";
 import { Loading } from "../../components/Loading";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { api } from "../../libs/axios";
@@ -22,13 +23,13 @@ export function CharacterDetails() {
   const { params } = useRoute<MyRoute>();
 
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<GeneralDetailProps[]>([]);
 
-  async function fetchCharacterDetailsList() {
+  async function fetchCharacterDetailsList(auctionId: number) {
     try {
       setLoading(true);
       const response = await api.get("/bazar/character-details", {
-        params: { auctionId: 1179843 },
+        params: { auctionId },
       });
 
       setData(response.data);
@@ -40,9 +41,20 @@ export function CharacterDetails() {
     }
   }
 
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<GeneralDetailProps>) => {
+      return (
+        <View style={{ flex: 1 }}>
+          <GeneralDetails {...item} />
+        </View>
+      );
+    },
+    []
+  );
+
   useEffect(() => {
-    fetchCharacterDetailsList();
-  }, []);
+    fetchCharacterDetailsList(params.item.auctionId);
+  }, [params.item.auctionId]);
 
   if (loading) {
     return <LoadingScreen />;
@@ -53,10 +65,11 @@ export function CharacterDetails() {
       <StatusBar barStyle="dark-content" />
       <FlashList
         keyExtractor={(item, index) => `${item.label} + ${index}`}
-        estimatedItemSize={40}
+        estimatedItemSize={76}
         data={data}
         ListHeaderComponentStyle={{
           marginTop: StatusBar.currentHeight,
+          paddingBottom: 16,
         }}
         ListHeaderComponent={
           <View style={{ paddingHorizontal: 24 }}>
@@ -67,27 +80,12 @@ export function CharacterDetails() {
             <CharacterInsider {...params.item} />
           </View>
         }
+        numColumns={2}
         contentContainerStyle={{
           paddingBottom: 80,
         }}
-        renderItem={({ item, index }) => (
-          <View key={index} style={{ paddingHorizontal: 24 }}>
-            <GeneralDetails {...item} />
-          </View>
-        )}
+        renderItem={renderItem}
       />
     </Container>
   );
 }
-// <View style={{ paddingTop: StatusBar.currentHeight }}>
-//   <StatusBar barStyle="dark-content" />
-//   <HeaderWrapper>
-//     <BackButton onPress={goBack} />
-//     <HeaderTitle>Details Account</HeaderTitle>
-//   </HeaderWrapper>
-//   <Text>{params.item.name}</Text>
-//   {data.map((item, index) => (
-//     <View key={index}>
-//       <GeneralDetails {...item} />
-//     </View>
-//   ))}

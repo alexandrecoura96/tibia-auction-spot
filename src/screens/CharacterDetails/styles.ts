@@ -10,6 +10,7 @@ export const HeaderWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: ${RFValue(16)}px;
 `;
 
 export const HeaderTitle = styled.Text`
