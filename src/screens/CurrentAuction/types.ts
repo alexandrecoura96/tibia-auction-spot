@@ -11,4 +11,5 @@ export interface DataType {
   charactersFeatures: Array<string>;
   inProgress: string;
   status?: string;
+  auctionId: number;
 }
