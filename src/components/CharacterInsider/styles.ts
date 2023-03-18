@@ -10,6 +10,13 @@ export const BoxShadow = styled(Shadow).attrs({
   border-radius: ${RFValue(16)}px;
 `;
 
+export const CharacterWrapper = styled.View`
+  padding: ${RFValue(10)}px;
+  background-color: ${({ theme }) => theme.colors.background.secondary};
+  border: 1px solid #5a2800;
+  justify-content: space-between;
+`;
+
 export const UpsideContainer = styled.View`
   flex: 1;
   flex-direction: row;
@@ -22,13 +29,6 @@ export const Title = styled.Text.attrs({
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
   color: ${({ theme }) => theme.colors.text_complementary.primary};
-`;
-
-export const CharacterWrapper = styled.View`
-  padding: ${RFValue(10)}px;
-  background-color: ${({ theme }) => theme.colors.background.secondary};
-  border: 1px solid #5a2800;
-  justify-content: space-between;
 `;
 
 export const TibiaCoin = styled.Image`
