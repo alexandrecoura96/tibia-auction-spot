@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, View, StatusBar, FlatList } from "react-native";
+import { Alert, View, StatusBar } from "react-native";
 import { CharacterResultCard } from "../../components/CharacterResultCard";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
 import { Header } from "../../components/Header";
