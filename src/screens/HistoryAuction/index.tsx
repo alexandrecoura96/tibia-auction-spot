@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, View, StatusBar, FlatList } from "react-native";
+import { Alert, View, StatusBar } from "react-native";
 import { CharacterResultCard } from "../../components/CharacterResultCard";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
 import { Header } from "../../components/Header";
@@ -39,8 +39,8 @@ export function HistoryAuction() {
   }
 
   const renderItem = useCallback(
-    ({ item, index }: ListRenderItemInfo<CharacterResultCardProps>) => (
-      <View key={index} style={{ paddingHorizontal: 24, paddingTop: 16 }}>
+    ({ item }: ListRenderItemInfo<CharacterResultCardProps>) => (
+      <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
         <CharacterResultCard
           isFinished
           {...item}
