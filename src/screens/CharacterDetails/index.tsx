@@ -6,7 +6,6 @@ import { BackButton } from "../../components/BackButton";
 import { CharacterInsider } from "../../components/CharacterInsider";
 import { GeneralDetails } from "../../components/GeneralDetails";
 import { GeneralDetailProps } from "../../components/GeneralDetails/types";
-import { Loading } from "../../components/Loading";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { api } from "../../libs/axios";
 import { DataType } from "../CurrentAuction/types";
