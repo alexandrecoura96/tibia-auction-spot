@@ -22,6 +22,7 @@ export default {
       primary: "#E2A713",
       secondary: "#F9D553",
       tertiary: "#FEFC2E",
+      quaternary: "#C98608",
     },
     indigo: {
       primary: "#001DD5",
