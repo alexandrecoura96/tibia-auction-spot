@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, View, StatusBar } from "react-native";
@@ -10,25 +10,37 @@ import { api } from "../../libs/axios";
 import { DataType } from "./types";
 import { Loading } from "../../components/Loading";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
+import { Modalize } from "react-native-modalize";
+import { WorldNames } from "../../utils/worldNames";
+import { ModalOptionItem } from "../../components/ModalOptionItem";
+import { ScreenHeight } from "../../utils/device";
 
 export function CurrentAuction() {
   const navigate = useNavigation();
+  const modalizeRef = useRef<Modalize>(null);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [worldName, setWorldName] = useState<string>("");
+  const [lastWorldName, setLastWorldName] = useState<string>();
   const [allDataLoaded, setAllDataLoaded] = useState(false);
 
-  async function fetchCurrentBazarList(pageNumber: number) {
+  async function fetchCurrentBazarList(pageNumber: number, worldName?: string) {
     try {
       setLoading(true);
       const response = await api.get("/bazar", {
-        params: { pageNumber },
+        params: { pageNumber, worldName },
       });
       const newData = response.data;
       if (newData.length === 0) {
         setAllDataLoaded(true);
       } else {
-        setData((prevData) => [...prevData, ...newData]);
+        if (worldName !== lastWorldName) {
+          setData(newData);
+          setLastWorldName(worldName);
+        } else {
+          setData((prevData) => [...prevData, ...newData]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -37,6 +49,14 @@ export function CurrentAuction() {
       setLoading(false);
     }
   }
+
+  const onModalOpen = () => {
+    modalizeRef.current?.open();
+  };
+
+  const onModalClose = () => {
+    modalizeRef.current?.close();
+  };
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<CharacterResultCardProps>) => (
@@ -63,9 +83,14 @@ export function CurrentAuction() {
     }
   }, [allDataLoaded, loading]);
 
+  const handleSelectWorldName = useCallback((worldName: string) => {
+    setWorldName(worldName);
+  }, []);
+
   useEffect(() => {
-    fetchCurrentBazarList(page);
-  }, [page]);
+    fetchCurrentBazarList(page, worldName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, worldName]);
 
   if (loading && page === 1) {
     return <LoadingScreen />;
@@ -84,6 +109,7 @@ export function CurrentAuction() {
           <Header
             title="Current Auctions"
             resultDescription="» Results: 3,196"
+            onFilterPress={onModalOpen}
           />
         }
         contentContainerStyle={{
@@ -102,6 +128,25 @@ export function CurrentAuction() {
         scrollEventThrottle={16}
         estimatedItemSize={234}
       />
+      <Modalize
+        ref={modalizeRef}
+        adjustToContentHeight
+        disableScrollIfPossible={false}
+        useNativeDriver
+        modalTopOffset={ScreenHeight / 2}
+        scrollViewProps={{ showsVerticalScrollIndicator: false }}
+      >
+        {WorldNames.map((item, index) => (
+          <ModalOptionItem
+            key={`${item.id} + ${index}`}
+            optionName={item.name}
+            onPress={() => {
+              handleSelectWorldName(item.name);
+              onModalClose();
+            }}
+          />
+        ))}
+      </Modalize>
     </View>
   );
 }
