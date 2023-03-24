@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, View, StatusBar } from "react-native";
@@ -10,25 +10,45 @@ import { api } from "../../libs/axios";
 import { DataType } from "../CurrentAuction/types";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
 import { Loading } from "../../components/Loading";
+import { Modalize } from "react-native-modalize";
+import { WorldNames } from "../../utils/worldNames";
+import { ModalOptionItem } from "../../components/ModalOptionItem";
+import { ScreenHeight } from "../../utils/device";
 
 export function HistoryAuction() {
   const navigate = useNavigation();
+  const modalizeRef = useRef<Modalize>(null);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<DataType[]>([]);
   const [page, setPage] = useState<any>(1);
   const [allDataLoaded, setAllDataLoaded] = useState(false);
+  const [worldName, setWorldName] = useState<string>("");
+  const [lastWorldName, setLastWorldName] = useState<string>();
 
-  async function fetchHistoryBazarList(pageNumber: number) {
+  const onModalOpen = () => {
+    modalizeRef.current?.open();
+  };
+
+  const onModalClose = () => {
+    modalizeRef.current?.close();
+  };
+
+  async function fetchHistoryBazarList(pageNumber: number, worldName?: string) {
     try {
       setLoading(true);
       const response = await api.get("/history", {
-        params: { pageNumber },
+        params: { pageNumber, worldName },
       });
       const newData = response.data;
       if (newData.length === 0) {
         setAllDataLoaded(true);
       } else {
-        setData((prevData) => [...prevData, ...newData]);
+        if (worldName !== lastWorldName) {
+          setData(newData);
+          setLastWorldName(worldName);
+        } else {
+          setData((prevData) => [...prevData, ...newData]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -64,9 +84,14 @@ export function HistoryAuction() {
     }
   }, [allDataLoaded, loading]);
 
+  const handleSelectWorldName = useCallback((worldName: string) => {
+    setWorldName(worldName);
+  }, []);
+
   useEffect(() => {
-    fetchHistoryBazarList(page);
-  }, [page]);
+    fetchHistoryBazarList(page, worldName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, worldName]);
 
   if (loading && page === 1) {
     return <LoadingScreen />;
@@ -85,6 +110,7 @@ export function HistoryAuction() {
           <Header
             title="History Auctions"
             resultDescription="» Results: 3,196"
+            onFilterPress={onModalOpen}
           />
         }
         contentContainerStyle={{
@@ -103,6 +129,25 @@ export function HistoryAuction() {
         scrollEventThrottle={16}
         estimatedItemSize={263}
       />
+      <Modalize
+        ref={modalizeRef}
+        adjustToContentHeight
+        disableScrollIfPossible={false}
+        useNativeDriver
+        modalTopOffset={ScreenHeight / 2}
+        scrollViewProps={{ showsVerticalScrollIndicator: false }}
+      >
+        {WorldNames.map((item, index) => (
+          <ModalOptionItem
+            key={`${item.id} + ${index}`}
+            optionName={item.name}
+            onPress={() => {
+              handleSelectWorldName(item.name);
+              onModalClose();
+            }}
+          />
+        ))}
+      </Modalize>
     </View>
   );
 }
