@@ -17,6 +17,19 @@ export const HeaderTitle = styled.Text`
   color: ${({ theme }) => theme.colors.common.white};
 `;
 
+export const FilterWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding-left: ${RFValue(24)}px;
+  padding-right: ${RFValue(24)}px;
+`;
+
+export const FilterName = styled.Text`
+  font-size: ${RFValue(16)}px;
+  font-family: ${({ theme }) => theme.fonts.livvic_600};
+  color: ${({ theme }) => theme.colors.background.quaternary};
+`;
+
 export const ResultDescription = styled.Text`
   font-size: ${RFValue(12)}px;
   font-family: ${({ theme }) => theme.fonts.martel_900};
