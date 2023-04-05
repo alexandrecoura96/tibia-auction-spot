@@ -12,7 +12,7 @@ import { WorldNames } from "../../utils/worldNames";
 import { ModalOptionItem } from "../../components/ModalOptionItem";
 import { ScreenHeight } from "../../utils/device";
 import SafeAreaView from "react-native-safe-area-view";
-import { CharacterResultCardItemWrapper, Container } from "./styles";
+import { Container } from "./styles";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components/native";
 import { LayoutProps } from "./types";
@@ -30,11 +30,10 @@ export const Layout = ({
   handleNavigate,
 }: LayoutProps): JSX.Element => {
   const theme = useTheme();
+
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<CharacterResultCardProps>) => (
-      <CharacterResultCardItemWrapper>
-        <CharacterResultCard {...item} onPress={() => handleNavigate(item)} />
-      </CharacterResultCardItemWrapper>
+      <CharacterResultCard {...item} onPress={() => handleNavigate(item)} />
     ),
     [handleNavigate]
   );

@@ -53,7 +53,7 @@ export const Controller = () => {
 
   const handleLoadMore = useCallback(() => {
     if (!allDataLoaded && !loading) {
-      setPage((prevPage: any) => prevPage + 1);
+      setPage((prevPage: number) => prevPage + 1);
     }
   }, [allDataLoaded, loading]);
 
