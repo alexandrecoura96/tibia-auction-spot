@@ -44,7 +44,7 @@ export function Initial() {
           <Image
             source={tibiaDragonLogo}
             style={{ height: 301 }}
-            resizeMode="center"
+            resizeMode="contain"
           />
           <View style={{ paddingLeft: 32, paddingRight: 32, width: "100%" }}>
             <ImageBackground

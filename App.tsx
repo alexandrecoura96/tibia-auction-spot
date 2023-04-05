@@ -50,10 +50,11 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <StatusBar
-            barStyle={Platform.OS === "ios" ? "dark-content" : "default"}
+            barStyle={Platform.OS === "ios" ? "light-content" : "default"}
             translucent
-            backgroundColor="transparent"
+            backgroundColor={Platform.OS === "ios" ? "#FFF0D9" : "transparent"}
           />
+
           <AppStackRoutes />
         </NavigationContainer>
       </SafeAreaProvider>

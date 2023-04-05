@@ -14,6 +14,7 @@ import { Modalize } from "react-native-modalize";
 import { WorldNames } from "../../utils/worldNames";
 import { ModalOptionItem } from "../../components/ModalOptionItem";
 import { ScreenHeight } from "../../utils/device";
+import SafeAreaView from "react-native-safe-area-view";
 
 export function HistoryAuction() {
   const navigate = useNavigation();
@@ -100,6 +101,7 @@ export function HistoryAuction() {
   return (
     <View style={{ backgroundColor: "#FFF0D9", flex: 1 }}>
       <StatusBar barStyle="dark-content" />
+      <SafeAreaView />
       <FlashList
         data={data}
         keyExtractor={(item, index) => `${item.name} + ${index}`}

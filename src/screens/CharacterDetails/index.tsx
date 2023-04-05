@@ -10,6 +10,7 @@ import { LoadingScreen } from "../../components/LoadingScreen";
 import { api } from "../../libs/axios";
 import { DataType } from "../CurrentAuction/types";
 import { Container, HeaderTitle, HeaderWrapper } from "./styles";
+import SafeAreaView from "react-native-safe-area-view";
 
 type Params = {
   item: DataType;
@@ -62,6 +63,7 @@ export function CharacterDetails() {
   return (
     <Container style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
+      <SafeAreaView />
       <FlashList
         keyExtractor={(item, index) => `${item.label} + ${index}`}
         estimatedItemSize={76}
