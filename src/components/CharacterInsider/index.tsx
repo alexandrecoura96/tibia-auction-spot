@@ -30,29 +30,35 @@ export function CharacterInsider({ ...props }: CharacterInsiderProps) {
       <CharacterWrapper>
         <UpsideContainer>
           <CharacterDetails>
-            <Title>{props.name}</Title>
+            <Title>{Boolean(props.name) ? props.name : "--"}</Title>
             <LabelWrapper style={{ marginTop: RFValue(8) }}>
               <Label>Vocation:</Label>
-              <LabelContent>{props.vocation}</LabelContent>
+              <LabelContent>
+                {Boolean(props.vocation) ? props.vocation : "--"}
+              </LabelContent>
             </LabelWrapper>
             <LabelWrapper style={{ marginTop: RFValue(8) }}>
               <Label>Level:</Label>
-              <LabelContent>{props.level}</LabelContent>
+              <LabelContent>
+                {Boolean(props.level) ? props.level : "--"}
+              </LabelContent>
             </LabelWrapper>
           </CharacterDetails>
           <CharacterContent>
-            <CharacterOutfit source={{ uri: props.outfitUrl }} />
+            {Boolean(props.outfitUrl) && (
+              <CharacterOutfit source={{ uri: props.outfitUrl }} />
+            )}
           </CharacterContent>
         </UpsideContainer>
         <DownsideContainer>
           <LabelWrapper>
             <Label>World:</Label>
-            <WorldName>{props.world}</WorldName>
+            <WorldName>{Boolean(props.world) ? props.world : "--"}</WorldName>
           </LabelWrapper>
           <LabelWrapper>
-            <Label>{bidLabel}</Label>
+            <Label>{Boolean(bidLabel) ? bidLabel : "--"}</Label>
             <Bid style={{ maxWidth: RFValue(70) }} numberOfLines={1}>
-              {props.bid}
+              {Boolean(props.bid) ? props.bid : "--"}
             </Bid>
             <TibiaCoin source={tibiaCoin} />
           </LabelWrapper>
