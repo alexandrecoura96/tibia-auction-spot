@@ -24,7 +24,7 @@ const grovebeast = require("../../assets/grovebeast.gif");
 const skullfrost = require("../../assets/skullfrost.gif");
 const thundergiant = require("../../assets/thundergiant.gif");
 
-export function Layout({ handleNavigate }: LayoutProps) {
+export const Layout = ({ handleNavigate }: LayoutProps): JSX.Element => {
   return (
     <Container
       source={backgroundImage}
@@ -50,4 +50,4 @@ export function Layout({ handleNavigate }: LayoutProps) {
       </Linear>
     </Container>
   );
-}
+};
