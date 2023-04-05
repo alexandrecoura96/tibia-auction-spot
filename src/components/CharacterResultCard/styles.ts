@@ -33,6 +33,9 @@ export const Container = styled.View`
   border: 1px solid #5a2800;
   background-color: ${({ theme }) => theme.colors.background.tertiary};
   padding: ${RFValue(16)}px;
+  margin-top: ${RFValue(16)}px;
+  margin-left: ${RFValue(24)}px;
+  margin-right: ${RFValue(24)}px;
 `;
 export const Title = styled.Text.attrs({
   numberOfLines: 1,
@@ -79,7 +82,7 @@ export const BazarDetailsWrapper = styled.View`
   padding-top: ${RFValue(16)}px;
   justify-content: space-between;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 export const Label = styled.Text.attrs({
