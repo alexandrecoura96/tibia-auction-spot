@@ -18,7 +18,7 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const Linear = styled(LinearGradient)`
-  border: ${RFValue(2)}px solid #000;
+  border: ${RFValue(2)}px solid ${({ theme }) => theme.colors.common.black};
   border-radius: ${RFValue(4)}px;
   height: ${RFValue(52)}px;
   width: ${RFValue(240)}px;
