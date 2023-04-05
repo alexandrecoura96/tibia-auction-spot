@@ -93,26 +93,30 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
                 <Title>{name}</Title>
                 <LabelWrapper style={{ marginTop: RFValue(8) }}>
                   <Label>Vocation:</Label>
-                  <LabelContent>{vocation}</LabelContent>
+                  <LabelContent>
+                    {Boolean(vocation) ? vocation : "--"}
+                  </LabelContent>
                 </LabelWrapper>
                 <LabelWrapper style={{ marginTop: RFValue(8) }}>
                   <Label>Level:</Label>
-                  <LabelContent>{level}</LabelContent>
+                  <LabelContent>{Boolean(level) ? level : "--"}</LabelContent>
                 </LabelWrapper>
               </CharacterDetails>
               <CharacterContent>
-                <CharacterOutfit source={{ uri: outfitUrl }} />
+                {Boolean(outfitUrl) && (
+                  <CharacterOutfit source={{ uri: outfitUrl }} />
+                )}
               </CharacterContent>
             </UpsideContainer>
             <DownsideContainer>
               <LabelWrapper>
                 <Label>World:</Label>
-                <WorldName>{world}</WorldName>
+                <WorldName>{Boolean(world) ? world : "--"}</WorldName>
               </LabelWrapper>
               <LabelWrapper>
-                <Label>{bidLabel}</Label>
+                <Label>{Boolean(bidLabel) ? bidLabel : "--"}</Label>
                 <Bid style={{ maxWidth: RFValue(70) }} numberOfLines={1}>
-                  {bid}
+                  {Boolean(bid) ? bid : "--"}
                 </Bid>
                 <TibiaCoin source={tibiaCoin} />
               </LabelWrapper>
@@ -123,7 +127,9 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
           <View>
             <LabelWrapper>
               <Label>Auction Start:</Label>
-              <LabelContent>{auctionStart}</LabelContent>
+              <LabelContent>
+                {Boolean(auctionStart) ? auctionStart : "--"}
+              </LabelContent>
             </LabelWrapper>
             <LabelWrapper style={{ marginTop: RFValue(8) }}>
               <Label>Auction End:</Label>
@@ -133,7 +139,9 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
             </LabelWrapper>
             {isFinished && (
               <LabelWrapper style={{ marginTop: RFValue(8) }}>
-                <StatusLabel status={status}>{status}</StatusLabel>
+                {Boolean(status) && (
+                  <StatusLabel status={status}>{status}</StatusLabel>
+                )}
               </LabelWrapper>
             )}
           </View>

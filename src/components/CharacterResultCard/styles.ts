@@ -30,7 +30,7 @@ export const DownsideContainer = styled.View`
 `;
 
 export const Container = styled.View`
-  border: 1px solid #5a2800;
+  border: 1px solid ${({ theme }) => theme.colors.text_primary.secondary};
   background-color: ${({ theme }) => theme.colors.background.tertiary};
   padding: ${RFValue(16)}px;
   margin-top: ${RFValue(16)}px;
@@ -49,7 +49,7 @@ export const Title = styled.Text.attrs({
 export const CharacterWrapper = styled.View`
   padding: ${RFValue(10)}px;
   background-color: ${({ theme }) => theme.colors.background.secondary};
-  border: 1px solid #5a2800;
+  border: 1px solid ${({ theme }) => theme.colors.text_primary.secondary};
   justify-content: space-between;
 `;
 
