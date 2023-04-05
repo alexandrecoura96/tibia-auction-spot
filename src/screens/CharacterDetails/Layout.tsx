@@ -1,67 +1,35 @@
-import { Route, useNavigation, useRoute } from "@react-navigation/native";
+import React, { useCallback } from "react";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
-import React, { useEffect, useState, useCallback } from "react";
-import { View, Text, StatusBar, Alert } from "react-native";
+import { View, StatusBar } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import { CharacterInsider } from "../../components/CharacterInsider";
 import { GeneralDetails } from "../../components/GeneralDetails";
 import { GeneralDetailProps } from "../../components/GeneralDetails/types";
 import { LoadingScreen } from "../../components/LoadingScreen";
-import { api } from "../../libs/axios";
-import { DataType } from "../CurrentAuction/types";
 import { Container, HeaderTitle, HeaderWrapper } from "./styles";
 import SafeAreaView from "react-native-safe-area-view";
+import { LayoutProps } from "./types";
+import { RFValue } from "react-native-responsive-fontsize";
 
-type Params = {
-  item: DataType;
-};
-
-type MyRoute = Route<"CurrentAuction", Params>;
-
-export function CharacterDetails() {
-  const { goBack } = useNavigation();
-  const { params } = useRoute<MyRoute>();
-
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<GeneralDetailProps[]>([]);
-
-  async function fetchCharacterDetailsList(auctionId: number) {
-    try {
-      setLoading(true);
-      const response = await api.get("/bazar/character-details", {
-        params: { auctionId },
-      });
-
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Ops", "Não possível carregar as informações");
-    } finally {
-      setLoading(false);
-    }
-  }
-
+export const Layout = ({
+  loading,
+  data,
+  goBack,
+  params,
+}: LayoutProps): JSX.Element => {
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<GeneralDetailProps>) => {
-      return (
-        <View style={{ flex: 1 }}>
-          <GeneralDetails {...item} />
-        </View>
-      );
+      return <GeneralDetails {...item} />;
     },
     []
   );
-
-  useEffect(() => {
-    fetchCharacterDetailsList(params.item.auctionId);
-  }, [params.item.auctionId]);
 
   if (loading) {
     return <LoadingScreen />;
   }
 
   return (
-    <Container style={{ flex: 1 }}>
+    <Container>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView />
       <FlashList
@@ -70,10 +38,10 @@ export function CharacterDetails() {
         data={data}
         ListHeaderComponentStyle={{
           marginTop: StatusBar.currentHeight,
-          paddingBottom: 16,
+          paddingBottom: RFValue(16),
         }}
         ListHeaderComponent={
-          <View style={{ paddingHorizontal: 24 }}>
+          <View style={{ paddingHorizontal: RFValue(24) }}>
             <HeaderWrapper>
               <BackButton onPress={goBack} />
               <HeaderTitle>Details Account</HeaderTitle>
@@ -83,10 +51,10 @@ export function CharacterDetails() {
         }
         numColumns={2}
         contentContainerStyle={{
-          paddingBottom: 80,
+          paddingBottom: RFValue(80),
         }}
         renderItem={renderItem}
       />
     </Container>
   );
-}
+};
