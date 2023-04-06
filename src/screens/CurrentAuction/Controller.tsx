@@ -35,7 +35,6 @@ export const Controller = () => {
     order_column?: string,
     order_direction?: string
   ) {
-    console.log(orderColumn, orderDirection);
     try {
       setLoading(true);
       const response = await api.get("/bazar", {

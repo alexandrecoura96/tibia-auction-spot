@@ -84,8 +84,6 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
         ? "Min. Bid:"
         : inProgress.valueOf();
 
-    console.log(inProgress);
-
     return (
       <Container>
         <BoxShadow>
