@@ -1,5 +1,7 @@
 export interface HeaderProps {
   title: string;
   resultDescription: string;
-  onFilterPress?: () => void;
+  onWorldPress?: () => void;
+  onVocationPress?: () => void;
+  onSortPress?: () => void;
 }

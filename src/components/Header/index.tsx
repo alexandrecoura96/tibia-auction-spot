@@ -3,7 +3,6 @@ import { FilterButton } from "../FilterButton";
 import {
   Background,
   Container,
-  FilterName,
   FilterWrapper,
   HeaderTitle,
   ResultDescription,
@@ -15,7 +14,9 @@ const header_background = require("../../assets/webp/header_background.webp");
 export function Header({
   title,
   resultDescription,
-  onFilterPress,
+  onWorldPress,
+  onVocationPress,
+  onSortPress,
 }: HeaderProps) {
   return (
     <Container>
@@ -23,9 +24,9 @@ export function Header({
         <HeaderTitle>{title}</HeaderTitle>
       </Background>
       <FilterWrapper>
-        <FilterName>Filters</FilterName>
-        <FilterButton title="World" onPress={onFilterPress} />
-        <FilterButton title="Vocation" />
+        <FilterButton title="World" onPress={onWorldPress} />
+        <FilterButton title="Vocation" onPress={onVocationPress} />
+        <FilterButton title="Sort" onPress={onSortPress} />
       </FilterWrapper>
       <ResultDescription>{resultDescription}</ResultDescription>
     </Container>

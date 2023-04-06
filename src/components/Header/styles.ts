@@ -22,12 +22,8 @@ export const FilterWrapper = styled.View`
   align-items: center;
   padding-left: ${RFValue(24)}px;
   padding-right: ${RFValue(24)}px;
-`;
-
-export const FilterName = styled.Text`
-  font-size: ${RFValue(16)}px;
-  font-family: ${({ theme }) => theme.fonts.livvic_600};
-  color: ${({ theme }) => theme.colors.background.quaternary};
+  justify-content: space-between;
+  margin-top: ${RFValue(8)}px;
 `;
 
 export const ResultDescription = styled.Text`

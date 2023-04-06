@@ -77,7 +77,7 @@ export const Layout = ({
             resultDescription="» Results"
             onWorldPress={onWorldModalOpen}
             onVocationPress={onVocationModalOpen}
-            onSkillPress={onSortModalOpen}
+            onSortPress={onSortModalOpen}
           />
         }
         contentContainerStyle={{
