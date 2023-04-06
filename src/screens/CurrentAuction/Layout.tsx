@@ -28,6 +28,7 @@ export const Layout = ({
   page,
   modalizeRef,
   handleNavigate,
+  refreshControl,
 }: LayoutProps): JSX.Element => {
   const theme = useTheme();
 
@@ -54,6 +55,7 @@ export const Layout = ({
       <StatusBar barStyle="dark-content" />
       <SafeAreaView />
       <FlashList
+        refreshControl={refreshControl}
         data={data}
         keyExtractor={(item, index) => `${item.name} + ${index}`}
         ListHeaderComponentStyle={{

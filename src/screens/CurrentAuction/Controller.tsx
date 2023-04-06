@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Alert } from "react-native";
+import { Alert, RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
 import { QueryDataType } from "./types";
@@ -17,6 +17,7 @@ export const Controller = () => {
   const [worldName, setWorldName] = useState<string>("");
   const [lastWorldName, setLastWorldName] = useState<string>();
   const [allDataLoaded, setAllDataLoaded] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function fetchCurrentBazarList(pageNumber: number, worldName?: string) {
     try {
@@ -65,6 +66,12 @@ export const Controller = () => {
     navigate.navigate("CharacterDetails", { item });
   };
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchCurrentBazarList(page, worldName).finally(() => setRefreshing(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, worldName]);
+
   useEffect(() => {
     fetchCurrentBazarList(page, worldName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,6 +89,9 @@ export const Controller = () => {
       allDataLoaded={allDataLoaded}
       modalizeRef={modalizeRef}
       handleNavigate={handleNavigate}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
     />
   );
 };
