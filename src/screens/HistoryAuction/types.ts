@@ -1,3 +1,4 @@
+import { RefreshControlProps } from "react-native";
 import { IHandles } from "react-native-modalize/lib/options";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
 
@@ -28,4 +29,5 @@ export interface LayoutProps {
   page: number;
   allDataLoaded: boolean;
   modalizeRef: React.RefObject<IHandles>;
+  refreshControl?: React.ReactElement<RefreshControlProps> | undefined;
 }

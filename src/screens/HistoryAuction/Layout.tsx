@@ -28,6 +28,7 @@ export function Layout({
   onModalOpen,
   page,
   handleNavigate,
+  refreshControl,
 }: LayoutProps) {
   const theme = useTheme();
 
@@ -63,6 +64,7 @@ export function Layout({
         ListHeaderComponentStyle={{
           marginTop: StatusBar.currentHeight,
         }}
+        refreshControl={refreshControl}
         ListHeaderComponent={
           <Header
             title="History Auctions"

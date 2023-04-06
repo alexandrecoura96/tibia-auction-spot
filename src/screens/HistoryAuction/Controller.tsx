@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { Alert } from "react-native";
+import { Alert, RefreshControl } from "react-native";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
 import { api } from "../../libs/axios";
 import { Modalize } from "react-native-modalize";
@@ -17,6 +17,7 @@ export const Controller = () => {
   const [allDataLoaded, setAllDataLoaded] = useState(false);
   const [worldName, setWorldName] = useState<string>("");
   const [lastWorldName, setLastWorldName] = useState<string>();
+  const [refreshing, setRefreshing] = useState(false);
 
   async function fetchHistoryBazarList(pageNumber: number, worldName?: string) {
     try {
@@ -65,6 +66,12 @@ export const Controller = () => {
     navigate.navigate("CharacterDetails", { item });
   };
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchHistoryBazarList(page, worldName).finally(() => setRefreshing(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, worldName]);
+
   useEffect(() => {
     fetchHistoryBazarList(page, worldName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,6 +89,9 @@ export const Controller = () => {
       onModalOpen={onModalOpen}
       page={page}
       handleNavigate={handleNavigate}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
     />
   );
 };
