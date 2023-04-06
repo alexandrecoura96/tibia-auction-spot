@@ -18,13 +18,14 @@ import {
 } from "./styles";
 import { CharacterInsiderProps } from "./types";
 
-const tibiaCoin = require("../../assets/tibia_coin.png");
+const tibiaCoin = require("../../assets/webp/tibia_coin.webp");
 
 export function CharacterInsider({ ...props }: CharacterInsiderProps) {
   const bidLabel =
     props.inProgress.valueOf() === "Current Bid:" || "Winning Bid:"
       ? props.inProgress.valueOf()
       : "Minimum Bid:";
+
   return (
     <BoxShadow>
       <CharacterWrapper>

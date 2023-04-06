@@ -10,7 +10,7 @@ import {
 } from "./styles";
 import { HeaderProps } from "./types";
 
-const header_background = require("../../assets/header_background.png");
+const header_background = require("../../assets/webp/header_background.webp");
 
 export function Header({
   title,

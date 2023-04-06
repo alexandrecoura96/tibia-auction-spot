@@ -26,9 +26,9 @@ import { getTimeLeft } from "../../utils/countdown";
 import dayjs from "dayjs";
 import { RFValue } from "react-native-responsive-fontsize";
 
-const searchIcon = require("../../assets/search.png");
+const searchIcon = require("../../assets/webp/search.webp");
 
-const tibiaCoin = require("../../assets/tibia_coin.png");
+const tibiaCoin = require("../../assets/webp/tibia_coin.webp");
 
 export class CharacterResultCard extends PureComponent<CharacterResultCardProps> {
   state = {

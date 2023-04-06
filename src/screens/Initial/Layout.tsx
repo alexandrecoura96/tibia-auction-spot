@@ -16,13 +16,13 @@ import {
 import { EnterButton } from "../../components/EnterButton";
 import { LayoutProps } from "./types";
 
-const backgroundImage = require("../../assets/fankit_offline_female.jpg");
-const overlayBottomImage = require("../../assets/overlay_bottom3.png");
-const tibiaDragonLogo = require("../../assets/tibia_dragon_logo.png");
-const panelSimple = require("../../assets/panel_simple.png");
-const grovebeast = require("../../assets/grovebeast.gif");
-const skullfrost = require("../../assets/skullfrost.gif");
-const thundergiant = require("../../assets/thundergiant.gif");
+const backgroundImage = require("../../assets/webp/fankit_offline_female.webp");
+const overlayBottomImage = require("../../assets/webp/overlay_bottom3.webp");
+const tibiaDragonLogo = require("../../assets/webp/tibia_dragon_logo.webp");
+const panelSimple = require("../../assets/webp/panel_simple.webp");
+const grovebeast = require("../../assets/gif/grovebeast.gif");
+const skullfrost = require("../../assets/gif/skullfrost.gif");
+const thundergiant = require("../../assets/gif/thundergiant.gif");
 
 export const Layout = ({ handleNavigate }: LayoutProps): JSX.Element => {
   return (
