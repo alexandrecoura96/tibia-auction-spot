@@ -16,6 +16,8 @@ import { Container } from "./styles";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components/native";
 import { LayoutProps } from "./types";
+import { VocationsNames } from "../../utils/vocations";
+import { SortTypeNames } from "../../utils/sortType";
 
 export const Layout = ({
   allDataLoaded,
@@ -23,12 +25,20 @@ export const Layout = ({
   handleLoadMore,
   handleSelectWorldName,
   loading,
-  onModalClose,
-  onModalOpen,
+  onVocationModalClose,
+  onVocationModalOpen,
+  onWorldModalClose,
+  onWorldModalOpen,
   page,
-  modalizeRef,
+  worldModalRef,
+  vocationModalRef,
   handleNavigate,
   refreshControl,
+  handleSelectVocation,
+  onSortModalClose,
+  onSortModalOpen,
+  sortModalRef,
+  handleSelectSort,
 }: LayoutProps): JSX.Element => {
   const theme = useTheme();
 
@@ -65,7 +75,9 @@ export const Layout = ({
           <Header
             title="Current Auctions"
             resultDescription="» Results"
-            onFilterPress={onModalOpen}
+            onWorldPress={onWorldModalOpen}
+            onVocationPress={onVocationModalOpen}
+            onSkillPress={onSortModalOpen}
           />
         }
         contentContainerStyle={{
@@ -85,7 +97,7 @@ export const Layout = ({
         estimatedItemSize={234}
       />
       <Modalize
-        ref={modalizeRef}
+        ref={worldModalRef}
         adjustToContentHeight
         disableScrollIfPossible={false}
         useNativeDriver
@@ -98,7 +110,45 @@ export const Layout = ({
             optionName={item.name}
             onPress={() => {
               handleSelectWorldName(item.name);
-              onModalClose();
+              onWorldModalClose();
+            }}
+          />
+        ))}
+      </Modalize>
+      <Modalize
+        ref={vocationModalRef}
+        adjustToContentHeight
+        disableScrollIfPossible={false}
+        useNativeDriver
+        modalTopOffset={ScreenHeight / 2}
+        scrollViewProps={{ showsVerticalScrollIndicator: false }}
+      >
+        {VocationsNames.map((item, index) => (
+          <ModalOptionItem
+            key={`${item.id} + ${index}`}
+            optionName={item.name}
+            onPress={() => {
+              handleSelectVocation(item.id);
+              onVocationModalClose();
+            }}
+          />
+        ))}
+      </Modalize>
+      <Modalize
+        ref={sortModalRef}
+        adjustToContentHeight
+        disableScrollIfPossible={false}
+        useNativeDriver
+        modalTopOffset={ScreenHeight / 2}
+        scrollViewProps={{ showsVerticalScrollIndicator: false }}
+      >
+        {SortTypeNames.map((item, index) => (
+          <ModalOptionItem
+            key={`${item.id} + ${index}`}
+            optionName={item.name}
+            onPress={() => {
+              handleSelectSort(item.order_column, item.order_direction);
+              onSortModalClose();
             }}
           />
         ))}

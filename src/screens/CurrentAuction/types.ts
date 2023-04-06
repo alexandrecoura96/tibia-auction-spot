@@ -20,14 +20,22 @@ export interface QueryDataType {
 
 export interface LayoutProps {
   handleSelectWorldName: (worldName: string) => void;
+  handleSelectVocation: (vocationId: string) => void;
+  handleSelectSort: (sortId: string, sortDirectionId: string) => void;
   handleLoadMore: () => void;
-  onModalOpen: () => void;
-  onModalClose: () => void;
+  onWorldModalOpen: () => void;
+  onWorldModalClose: () => void;
+  onVocationModalOpen: () => void;
+  onVocationModalClose: () => void;
+  onSortModalOpen: () => void;
+  onSortModalClose: () => void;
   data: Array<QueryDataType>;
   loading: boolean;
   page: number;
   allDataLoaded: boolean;
-  modalizeRef: React.RefObject<IHandles>;
+  worldModalRef: React.RefObject<IHandles>;
+  vocationModalRef: React.RefObject<IHandles>;
+  sortModalRef: React.RefObject<IHandles>;
   handleNavigate: (item: CharacterResultCardProps) => void;
   refreshControl?: React.ReactElement<RefreshControlProps> | undefined;
 }
