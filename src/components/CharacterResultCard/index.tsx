@@ -80,9 +80,11 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
     } = this.props;
 
     const bidLabel =
-      inProgress.valueOf() === "Current Bid:" || "Winning Bid:"
-        ? inProgress.valueOf()
-        : "Minimum Bid:";
+      inProgress.valueOf() === "Minimum Bid:"
+        ? "Min. Bid:"
+        : inProgress.valueOf();
+
+    console.log(inProgress);
 
     return (
       <Container>
