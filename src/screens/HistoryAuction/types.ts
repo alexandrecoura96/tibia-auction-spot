@@ -19,15 +19,23 @@ export interface QueryDataType {
 }
 
 export interface LayoutProps {
-  onModalOpen: () => void;
-  onModalClose: () => void;
   handleLoadMore: () => void;
   handleSelectWorldName: (worldName: string) => void;
   handleNavigate: (item: CharacterResultCardProps) => void;
+  handleSelectVocation: (vocationId: string) => void;
+  handleSelectSort: (sortId: string, sortDirectionId: string) => void;
+  onWorldModalOpen: () => void;
+  onWorldModalClose: () => void;
+  onVocationModalOpen: () => void;
+  onVocationModalClose: () => void;
+  onSortModalOpen: () => void;
+  onSortModalClose: () => void;
   data: Array<QueryDataType>;
   loading: boolean;
   page: number;
   allDataLoaded: boolean;
-  modalizeRef: React.RefObject<IHandles>;
   refreshControl?: React.ReactElement<RefreshControlProps> | undefined;
+  worldModalRef: React.RefObject<IHandles>;
+  vocationModalRef: React.RefObject<IHandles>;
+  sortModalRef: React.RefObject<IHandles>;
 }

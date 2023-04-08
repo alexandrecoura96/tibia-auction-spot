@@ -29,13 +29,13 @@ export interface LayoutProps {
   onVocationModalClose: () => void;
   onSortModalOpen: () => void;
   onSortModalClose: () => void;
+  handleNavigate: (item: CharacterResultCardProps) => void;
   data: Array<QueryDataType>;
   loading: boolean;
   page: number;
   allDataLoaded: boolean;
+  refreshControl?: React.ReactElement<RefreshControlProps> | undefined;
   worldModalRef: React.RefObject<IHandles>;
   vocationModalRef: React.RefObject<IHandles>;
   sortModalRef: React.RefObject<IHandles>;
-  handleNavigate: (item: CharacterResultCardProps) => void;
-  refreshControl?: React.ReactElement<RefreshControlProps> | undefined;
 }
