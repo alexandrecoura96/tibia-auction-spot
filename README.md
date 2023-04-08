@@ -65,7 +65,7 @@ $ node index.js
 # If you prefer to use Yarn, run the command below
 $ yarn start
 
-# O servidor inciará na porta 3333 - acesse <http://localhost:3333>
+# O servidor inciará na porta 3000 - acesse <http://localhost:3000>
 ```
 
 📱 Running the App
