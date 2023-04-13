@@ -50,12 +50,22 @@ export const Controller = () => {
       if (newData.length === 0) {
         setAllDataLoaded(true);
       } else {
-        setData(newData);
-        setLastOrderColumn(order_column);
-        setLastOrderDirection(order_direction);
-        setLastVocationName(vocation);
-        setLastWorldName(worldName);
-        if (worldName === lastWorldName) {
+        if (worldName !== lastWorldName) {
+          setData(newData);
+          setLastWorldName(worldName);
+        }
+        if (order_column !== lastOrderColumn) {
+          setData(newData);
+          setLastOrderColumn(order_column);
+        }
+        if (order_direction !== lastOrderDirection) {
+          setData(newData);
+          setLastOrderDirection(order_direction);
+        }
+        if (vocation !== lastVocationName) {
+          setData(newData);
+          setLastVocationName(vocation);
+        } else {
           setData((prevData) => [...prevData, ...newData]);
         }
       }
@@ -143,7 +153,7 @@ export const Controller = () => {
       orderDirection
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, worldName, vocationId, orderColumn, orderDirection, filterUpdated]);
+  }, [page, worldName, vocationId, orderColumn, orderDirection]);
 
   return (
     <Layout
