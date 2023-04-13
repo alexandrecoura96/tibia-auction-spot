@@ -3,6 +3,15 @@ This is a project developed in React Native for study purposes, inspired by the 
 
 The application allows users to view the characters available in the Tibia bazaar, as well as filter by world, vocation or sorting. In addition, the user can view details of the selected character, such as their description and skill levels.
 
+
+https://user-images.githubusercontent.com/64710438/231633011-9d5f06d6-b1a6-498e-af40-ad3839fe9c87.mp4
+##
+https://user-images.githubusercontent.com/64710438/231633016-c6e2184b-f187-4adf-8b34-b36a009e87ce.mp4
+
+
+
+
+
 ## What's in this project:
 • Infinity scroll
 
@@ -27,6 +36,12 @@ The application allows users to view the characters available in the Tibia bazaa
 • Linear Gradient
 
 • Masked View
+
+• Offline First (pending to do)
+
+• Alerts (pending to do)
+
+• Tests with Jest (pending to do)
 
 • A lot more, come to see =)
 
