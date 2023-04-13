@@ -22,7 +22,7 @@ export function AppTabRoutes() {
         component={CurrentAuction}
         options={{
           headerShown: false,
-          tabBarLabel: "Bazar",
+          tabBarLabel: "Bazaar",
           tabBarInactiveTintColor: "#C98608",
           tabBarActiveTintColor: "#5A2800",
 
