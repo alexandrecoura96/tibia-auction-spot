@@ -84,6 +84,9 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
         ? "Min. Bid:"
         : inProgress.valueOf();
 
+    const formattedStatus =
+      status === "currentlyprocessed" ? "currently processed" : status;
+
     return (
       <Container>
         <BoxShadow>
@@ -140,7 +143,9 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
             {isFinished && (
               <LabelWrapper style={{ marginTop: RFValue(8) }}>
                 {Boolean(status) && (
-                  <StatusLabel status={status}>{status}</StatusLabel>
+                  <StatusLabel status={formattedStatus}>
+                    {formattedStatus}
+                  </StatusLabel>
                 )}
               </LabelWrapper>
             )}

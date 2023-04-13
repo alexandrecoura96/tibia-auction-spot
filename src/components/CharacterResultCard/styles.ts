@@ -150,6 +150,13 @@ export const StatusLabel = styled.Text.attrs({
   font-family: ${({ theme }) => theme.fonts.livvic_500};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
+
+  ${(props) =>
+    props.status === "currently processed" &&
+    css`
+      color: ${({ theme }) => theme.colors.tertiary};
+    `};
+
   ${(props) =>
     props.status === "finished" &&
     css`
@@ -159,6 +166,6 @@ export const StatusLabel = styled.Text.attrs({
   ${(props) =>
     props.status === "cancelled" &&
     css`
-      color: ${({ theme }) => theme.colors.tertiary};
+      color: ${({ theme }) => theme.colors.alert};
     `};
 `;
