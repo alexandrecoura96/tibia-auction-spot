@@ -50,9 +50,14 @@ export const Controller = () => {
       if (newData.length === 0) {
         setAllDataLoaded(true);
       } else {
-        setData(newData);
-        setLastOrderColumn(order_column);
-        setLastOrderDirection(order_direction);
+        if (
+          order_column !== lastOrderColumn ||
+          order_direction !== lastOrderDirection
+        ) {
+          setData(newData);
+          setLastOrderColumn(order_column);
+          setLastOrderDirection(order_direction);
+        }
         if (worldName !== lastWorldName) {
           setData(newData);
           setLastWorldName(worldName);
