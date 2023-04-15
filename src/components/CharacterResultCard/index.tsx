@@ -95,14 +95,14 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
               <CharacterDetails>
                 <Title>{name}</Title>
                 <LabelWrapper style={{ marginTop: RFValue(8) }}>
+                  <Label>World:</Label>
+                  <WorldName>{Boolean(world) ? world : "--"}</WorldName>
+                </LabelWrapper>
+                <LabelWrapper style={{ marginTop: RFValue(8) }}>
                   <Label>Vocation:</Label>
                   <LabelContent>
                     {Boolean(vocation) ? vocation : "--"}
                   </LabelContent>
-                </LabelWrapper>
-                <LabelWrapper style={{ marginTop: RFValue(8) }}>
-                  <Label>Level:</Label>
-                  <LabelContent>{Boolean(level) ? level : "--"}</LabelContent>
                 </LabelWrapper>
               </CharacterDetails>
               <CharacterContent>
@@ -113,8 +113,8 @@ export class CharacterResultCard extends PureComponent<CharacterResultCardProps>
             </UpsideContainer>
             <DownsideContainer>
               <LabelWrapper>
-                <Label>World:</Label>
-                <WorldName>{Boolean(world) ? world : "--"}</WorldName>
+                <Label>Level:</Label>
+                <LabelContent>{Boolean(level) ? level : "--"}</LabelContent>
               </LabelWrapper>
               <LabelWrapper>
                 <Label>{Boolean(bidLabel) ? bidLabel : "--"}</Label>
