@@ -50,9 +50,14 @@ export const Controller = () => {
       if (newData.length === 0) {
         setAllDataLoaded(true);
       } else {
-        setData(newData);
-        setLastOrderColumn(order_column);
-        setLastOrderDirection(order_direction);
+        if (
+          order_column !== lastOrderColumn ||
+          order_direction !== lastOrderDirection
+        ) {
+          setData(newData);
+          setLastOrderColumn(order_column);
+          setLastOrderDirection(order_direction);
+        }
         if (worldName !== lastWorldName) {
           setData(newData);
           setLastWorldName(worldName);
@@ -134,11 +139,15 @@ export const Controller = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchCurrentBazarList(1, worldName, vocationId).finally(() =>
-      setRefreshing(false)
-    );
+    fetchCurrentBazarList(
+      1,
+      worldName,
+      vocationId,
+      orderColumn,
+      orderDirection
+    ).finally(() => setRefreshing(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [1, worldName, vocationId]);
+  }, [1, worldName, vocationId, orderColumn, orderDirection]);
 
   useEffect(() => {
     fetchCurrentBazarList(
