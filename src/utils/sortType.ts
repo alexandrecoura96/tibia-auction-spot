@@ -7,6 +7,12 @@ interface SortTypeProps {
 
 export const SortTypeNames: SortTypeProps[] = [
   {
+    id: "0",
+    order_column: "0",
+    order_direction: "1",
+    name: "None",
+  },
+  {
     id: "1",
     order_column: "102",
     order_direction: "0",
