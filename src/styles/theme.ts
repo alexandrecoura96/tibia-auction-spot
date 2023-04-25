@@ -9,7 +9,7 @@ export default {
       quaternary: "#5F4D41",
     },
     success: "#238662",
-    text_primary: {
+    text: {
       primary: "#CBA88E",
       secondary: "#5A2800",
     },

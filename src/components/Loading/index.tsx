@@ -7,7 +7,7 @@ export function Loading() {
   const theme = useTheme();
   return (
     <Container>
-      <ActivityIndicator color={theme.colors.text_primary.secondary} />
+      <ActivityIndicator color={theme.colors.text.secondary} />
     </Container>
   );
 }

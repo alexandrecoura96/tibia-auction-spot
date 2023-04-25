@@ -50,7 +50,7 @@ export const Background = styled.ImageBackground`
 export const Title = styled.Text`
   font-size: ${RFValue(30)}px;
   font-family: ${({ theme }) => theme.fonts.martel_400};
-  color: ${({ theme }) => theme.colors.text_primary.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 export const CreaturesImageWrapper = styled.View`
@@ -69,7 +69,7 @@ export const CreaturesImage = styled.Image`
 export const Description = styled.Text`
   font-size: ${RFValue(20)}px;
   font-family: ${({ theme }) => theme.fonts.livvic_500};
-  color: ${({ theme }) => theme.colors.text_primary.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 export const OverLayButtomImage = styled.Image.attrs({

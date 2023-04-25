@@ -9,10 +9,7 @@ export function LoadingScreen() {
     <>
       <StatusBar barStyle="dark-content" />
       <Container>
-        <ActivityIndicator
-          size={32}
-          color={theme.colors.text_primary.secondary}
-        />
+        <ActivityIndicator size={32} color={theme.colors.text.secondary} />
       </Container>
     </>
   );

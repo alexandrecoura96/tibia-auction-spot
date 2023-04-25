@@ -4,11 +4,12 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   flex: 1;
   flex-direction: column;
-  padding: ${RFValue(8)}px ${RFValue(16)}px;
-  margin-bottom: ${RFValue(16)}px;
+  padding: ${RFValue(8)}px;
+  margin: ${RFValue(8)}px;
   align-self: center;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.colors.background.secondary};
 `;
 
 export const Label = styled.Text.attrs({
@@ -26,7 +27,7 @@ export const Content = styled.Text.attrs({
   font-family: ${({ theme }) => theme.fonts.livvic_700};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
-  color: ${({ theme }) => theme.colors.text_primary.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-top: ${RFValue(4)}px;
   text-align: center;
 `;

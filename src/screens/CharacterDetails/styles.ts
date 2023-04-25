@@ -16,7 +16,7 @@ export const HeaderWrapper = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: ${RFValue(30)}px;
   line-height: ${RFValue(50)}px;
-  color: ${({ theme }) => theme.colors.text_primary.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-family: ${({ theme }) => theme.fonts.martel_400};
   flex: 1;
   text-align: center;

@@ -30,7 +30,7 @@ export const DownsideContainer = styled.View`
 `;
 
 export const Container = styled.View`
-  border: 1px solid ${({ theme }) => theme.colors.text_primary.secondary};
+  border: 1px solid ${({ theme }) => theme.colors.text.secondary};
   background-color: ${({ theme }) => theme.colors.background.tertiary};
   padding: ${RFValue(16)}px;
   margin-top: ${RFValue(16)}px;
@@ -49,7 +49,7 @@ export const Title = styled.Text.attrs({
 export const CharacterWrapper = styled.View`
   padding: ${RFValue(10)}px;
   background-color: ${({ theme }) => theme.colors.background.secondary};
-  border: 1px solid ${({ theme }) => theme.colors.text_primary.secondary};
+  border: 1px solid ${({ theme }) => theme.colors.text.secondary};
   justify-content: space-between;
 `;
 
@@ -114,7 +114,7 @@ export const WorldName = styled.Text.attrs({
   font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
-  color: ${({ theme }) => theme.colors.text_primary.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-left: ${RFValue(4)}px;
 `;
 
@@ -124,7 +124,7 @@ export const Bid = styled.Text.attrs({
   font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
-  color: ${({ theme }) => theme.colors.text_primary.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-left: ${RFValue(4)}px;
 `;
 

@@ -32,5 +32,5 @@ export const ResultDescription = styled.Text`
   padding-top: ${RFValue(16)}px;
   padding-right: ${RFValue(31)}px;
   align-self: flex-end;
-  color: ${({ theme }) => theme.colors.text_primary.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;

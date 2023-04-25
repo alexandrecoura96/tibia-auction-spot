@@ -11,7 +11,7 @@ export function BackButton({ ...props }: IBackButtonProps) {
       <Feather
         name="arrow-left"
         size={32}
-        color={theme.colors.text_primary.secondary}
+        color={theme.colors.text.secondary}
       />
     </Container>
   );
