@@ -7,76 +7,22 @@ import { api } from "../../libs/axios";
 import { Modalize } from "react-native-modalize";
 import { Layout } from "./Layout";
 import { QueryDataType } from "./types";
+import { useBazarFetch } from "../../hooks/useBazarFetch";
 
 export const Controller = () => {
   const navigate = useNavigation();
   const worldModalRef = useRef<Modalize>(null);
   const vocationModalRef = useRef<Modalize>(null);
   const sortModalRef = useRef<Modalize>(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<QueryDataType[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [allDataLoaded, setAllDataLoaded] = useState(false);
   const [worldName, setWorldName] = useState<string>("");
   const [vocationId, setVocationId] = useState<string>("");
   const [orderColumn, setOrderColumn] = useState<string>("");
   const [orderDirection, setOrderDirection] = useState<string>("");
-  const [lastWorldName, setLastWorldName] = useState<string>();
-  const [lastVocationName, setLastVocationName] = useState<string>();
-  const [lastOrderColumn, setLastOrderColumn] = useState<string>();
-  const [lastOrderDirection, setLastOrderDirection] = useState<string>();
   const [filterUpdated, setFilterUpdated] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  async function fetchHistoryBazarList(
-    pageNumber: number,
-    worldName?: string,
-    vocation?: string,
-    order_column?: string,
-    order_direction?: string
-  ) {
-    try {
-      setLoading(true);
-      const response = await api.get("/history", {
-        params: {
-          pageNumber,
-          worldName,
-          vocation,
-          order_column,
-          order_direction,
-        },
-      });
-      const newData = response.data;
-      if (newData.length === 0) {
-        setAllDataLoaded(true);
-      } else {
-        if (
-          order_column !== lastOrderColumn ||
-          order_direction !== lastOrderDirection
-        ) {
-          setData(newData);
-          setLastOrderColumn(order_column);
-          setLastOrderDirection(order_direction);
-        }
-        if (worldName !== lastWorldName) {
-          setData(newData);
-          setLastWorldName(worldName);
-        }
-
-        if (vocation !== lastVocationName) {
-          setData(newData);
-          setLastVocationName(vocation);
-        } else {
-          setData((prevData) => [...prevData, ...newData]);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Ops", "Não possível carregar as informações");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { data, allDataLoaded, loading, page, fetchBazarList, setPage } =
+    useBazarFetch({ endpoint: "/history" });
 
   const onWorldModalOpen = () => {
     worldModalRef.current?.open();
@@ -106,7 +52,7 @@ export const Controller = () => {
     if (!allDataLoaded && !loading) {
       setPage((prevPage: number) => prevPage + 1);
     }
-  }, [allDataLoaded, loading]);
+  }, [allDataLoaded, loading, setPage]);
 
   const handleSelectWorldName = useCallback(
     (worldName: string) => {
@@ -139,20 +85,14 @@ export const Controller = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchHistoryBazarList(1, worldName, vocationId).finally(() =>
+    fetchBazarList(1, worldName, vocationId).finally(() =>
       setRefreshing(false)
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [1, worldName, vocationId]);
 
   useEffect(() => {
-    fetchHistoryBazarList(
-      page,
-      worldName,
-      vocationId,
-      orderColumn,
-      orderDirection
-    );
+    fetchBazarList(page, worldName, vocationId, orderColumn, orderDirection);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, worldName, vocationId, orderColumn, orderDirection]);
 
