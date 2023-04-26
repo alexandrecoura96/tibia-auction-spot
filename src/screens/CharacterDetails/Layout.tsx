@@ -53,6 +53,7 @@ export const Layout = ({
         contentContainerStyle={{
           paddingBottom: RFValue(80),
         }}
+        showsVerticalScrollIndicator={false}
         renderItem={renderItem}
       />
     </Container>
