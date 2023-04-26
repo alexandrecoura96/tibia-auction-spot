@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { QueryDataType } from "./types";
 import { Modalize } from "react-native-modalize";
 import { Layout } from "./Layout";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";

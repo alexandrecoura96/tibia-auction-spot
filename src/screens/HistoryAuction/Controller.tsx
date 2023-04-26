@@ -1,12 +1,10 @@
 import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, RefreshControl } from "react-native";
+import { RefreshControl } from "react-native";
 import { CharacterResultCardProps } from "../../components/CharacterResultCard/types";
-import { api } from "../../libs/axios";
 import { Modalize } from "react-native-modalize";
 import { Layout } from "./Layout";
-import { QueryDataType } from "./types";
 import { useBazarFetch } from "../../hooks/useBazarFetch";
 
 export const Controller = () => {
