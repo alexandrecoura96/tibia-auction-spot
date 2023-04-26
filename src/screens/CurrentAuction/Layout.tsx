@@ -95,6 +95,7 @@ export const Layout = ({
         onEndReachedThreshold={0.1}
         scrollEventThrottle={16}
         estimatedItemSize={234}
+        showsVerticalScrollIndicator={false}
       />
       <Modalize
         ref={worldModalRef}
