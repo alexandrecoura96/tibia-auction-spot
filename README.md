@@ -20,6 +20,8 @@ The application allows users to view the characters available in the Tibia bazaa
 
 • Pull to refresh.
 
+• Custom Hook
+
 • Typescript
 
 • Responsive Font Size
