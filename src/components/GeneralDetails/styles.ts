@@ -15,19 +15,20 @@ export const Container = styled.View`
 export const Label = styled.Text.attrs({
   numberOfLines: 4,
 })`
-  font-family: ${({ theme }) => theme.fonts.livvic_500};
+  font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
   color: ${({ theme }) => theme.colors.common.black};
+  color: ${({ theme }) => theme.colors.text_complementary.primary};
   text-align: center;
 `;
 export const Content = styled.Text.attrs({
   numberOfLines: 4,
 })`
-  font-family: ${({ theme }) => theme.fonts.livvic_700};
+  font-family: ${({ theme }) => theme.fonts.livvic_500};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.common.black};
   margin-top: ${RFValue(4)}px;
   text-align: center;
 `;
