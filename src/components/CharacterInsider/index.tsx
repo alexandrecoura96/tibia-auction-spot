@@ -33,15 +33,17 @@ export function CharacterInsider({ ...props }: CharacterInsiderProps) {
           <CharacterDetails>
             <Title>{Boolean(props.name) ? props.name : "--"}</Title>
             <LabelWrapper style={{ marginTop: RFValue(8) }}>
+              <LabelWrapper>
+                <Label>World:</Label>
+                <WorldName>
+                  {Boolean(props.world) ? props.world : "--"}
+                </WorldName>
+              </LabelWrapper>
+            </LabelWrapper>
+            <LabelWrapper style={{ marginTop: RFValue(8) }}>
               <Label>Vocation:</Label>
               <LabelContent>
                 {Boolean(props.vocation) ? props.vocation : "--"}
-              </LabelContent>
-            </LabelWrapper>
-            <LabelWrapper style={{ marginTop: RFValue(8) }}>
-              <Label>Level:</Label>
-              <LabelContent>
-                {Boolean(props.level) ? props.level : "--"}
               </LabelContent>
             </LabelWrapper>
           </CharacterDetails>
@@ -53,9 +55,12 @@ export function CharacterInsider({ ...props }: CharacterInsiderProps) {
         </UpsideContainer>
         <DownsideContainer>
           <LabelWrapper>
-            <Label>World:</Label>
-            <WorldName>{Boolean(props.world) ? props.world : "--"}</WorldName>
+            <Label>Level:</Label>
+            <LabelContent>
+              {Boolean(props.level) ? props.level : "--"}
+            </LabelContent>
           </LabelWrapper>
+
           <LabelWrapper>
             <Label>{Boolean(bidLabel) ? bidLabel : "--"}</Label>
             <Bid style={{ maxWidth: RFValue(70) }} numberOfLines={1}>

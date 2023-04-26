@@ -85,7 +85,7 @@ export const WorldName = styled.Text.attrs({
   font-family: ${({ theme }) => theme.fonts.livvic_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(18)}px;
-  color: ${({ theme }) => theme.colors.text_complementary.primary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-left: ${RFValue(4)}px;
 `;
 
