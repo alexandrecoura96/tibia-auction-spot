@@ -20,7 +20,7 @@ The application allows users to view the characters available in the Tibia bazaa
 
 • Pull to refresh.
 
-• Custom Hook
+• Custom Hooks
 
 • Typescript
 
@@ -83,7 +83,7 @@ $ node index.js
 # If you prefer to use Yarn, run the command below
 $ yarn start
 
-# O servidor inciará na porta 3000 - acesse <http://localhost:3000>
+# The server will start on port 3000 - access http://localhost:3000
 ```
 
 📱 Running the App
